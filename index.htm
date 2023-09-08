@@ -13,19 +13,14 @@
         <div class="wrapper">
 
             <div class="header">
-                <div class="logo">
-                    <div class="cell"><img src="roc logo.png" alt="NW ROC Logo"></div>
-                </div>
-                <div class="title">REGIONAL <br> OPERATIONS CENTER <br> Notification Template</div>
+                <include src="header.htm"></include>
             </div>
 
             <div class="menu">
-
                 <include src="nav.html"></include>
-
             </div>
 
-        </div>
+        </div><!--Wrapper End-->
 
         <div class="main">
             <div class="row">
@@ -51,6 +46,7 @@
 						   </select>
 					    </div>
                     </div> 
+<!--ETS section-->
                     <div class="row displayNone ETS">
                         <div class="cell">Fiber Count Total</div>
                         <div class="cell"><input type="text" id="ETSTotal" onchange="ETS();"></div>
@@ -95,6 +91,7 @@
                         <div class="cell">Current Status</div>
                         <div class="cell"><textarea id="ETSCurrent" onchange="ETS();"></textarea></div>
                     </div> 
+<!--Repeat outage info-->
                     <div class="row displayNone Fiorm Reppy6">
                         <div class="cell" style="text-align: right;">How Many Y6 Repeats: </div>
                         <div class="cell" align="left">
@@ -202,6 +199,7 @@
                         <div class="cell" align="left">
                         <input type="text" id="RepCustAddy" style="width: 300px;" onChange="RepUpdate();" /></div>
                     </div>
+<!--Repeat Y6's section for pervious orders-->
                     <div class="row displayNone Reppy6a">
                         <div class="cell">Number of Orders </div>
                         <div class="cell">
@@ -1202,6 +1200,8 @@
         <div class="cell">&nbsp;</div>
         <div class="cell" style="text-align: center;">
         <BR><BR>
+
+<!--power companies and hubs-->
 Select Hub for Power Company Website:<BR>
 <Select id="PowerHub" onChange="PwrHub();">
 <Option></option>
@@ -1458,7 +1458,8 @@ Select Hub for Power Company Website:<BR>
                 </div>
             </div>
         </div>
-    </body>
+    </div><!--Main close-->
+</body>
 
 
     <script src="scripts.js"></script>

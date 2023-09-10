@@ -78,17 +78,13 @@ footer div {text-align: left;}
 	float: left;
 	width: 15%;
 	height: 100%;
-	font-size: 36px;
-	font-family: "Arial Black";
 	line-height: 28px;
 	padding-left: 10px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
-.title{
-	display: block;
-	width: 85%;
-	height: 100%;
+h1{
 	text-align: center;
 	line-height: 70px;
 	font-weight: bold;

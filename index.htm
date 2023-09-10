@@ -4,45 +4,48 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Test</title>
+        <title>Notification Template</title>
         <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
-
         <header>
-                <include src="header.htm"></include>
+            <include src="header.htm"></include>
         </header>
 
         <nav>
-                <include src="nav.html"></include>
+            <include src="nav.html"></include>
         </nav>
 
         <main>
+<!--<div class="cell" style="padding-top: 10px; padding-left: 25px;display:block;width: 550px"></div>-->
+            <section>
+                <div class="cell"> <input type="button" id="EverButton" width="3000" value="Everbridge? [ ]" onclick="Everbridge()" />
+                    <input class="displayNone" type="checkbox" id="EverbridgeMode" /><BR><BR><center><a class="EBLink displayNone" id="EBLnk" target=_new href="https://authentication.everbridge.net/cas/saml/login/censmanager?casSaml=true&disco=true&service=https://manager.everbridge.net/docms/j_spring_cas_security_check">Everbridge</a></center>
+                </div>
+            </section>
 
-                <div class="cell" style="padding-top: 10px; padding-left: 25px;display:block;width: 550px">
-                    <div class="row ORIG">
-                        <div class="cell"> <input type="button" id="EverButton" width="3000" value="Everbridge? [ ]" onclick="Everbridge()" />
-                            <input class="displayNone" type="checkbox" id="EverbridgeMode" /><BR><BR><center><a class="EBLink displayNone" id="EBLnk" target=_new href="https://authentication.everbridge.net/cas/saml/login/censmanager?casSaml=true&disco=true&service=https://manager.everbridge.net/docms/j_spring_cas_security_check">Everbridge</a></center>
-                        </div>
-                        <div class="cell">Notification Type:<BR>
-							<select class="SHOWME" id="NoteType" onChange="myUpdate();ReVis();HideBC();ETS();" >
-								<option label=" "></option>
-								<option class="NoEBMode" value="Initial">Initial Notification</option>
-								<option class="NoEBMode" value="Update Before">Update: Tech Arrival/En Route</option>
-								<option class="YesEBMode displayNone" value="EBTechNot">Tech Access Issues/En Route</option> 
-								<option class="NoEBMode" value="Update After">Update: Hourly Update</option>
-								<option class="YesEBMode displayNone" value="Update After">Initial Everbridge/Hourly Update</option>
-								<option class="YesEBMode" value="PSQMTA">Commercial Power Updates</option>
-								<option class="NoEBMode" value="Monitoring">Monitoring</option>
-								<option class="NoEBMode" value="RepY6">Repeat Y6 Email</option>
-								<option class="NoEBMode" value="RepOut">Repeat Outage Email</option>
-								<option class="NoEBMode" value="IRIS">IRIS</option>
-								<option class="NoEBMode" value="ENOC/ETS">ENOC/ETS Update</option>
-						   </select>
-					    </div>
-                    </div> 
+            <section>
+                <div class="cell">Notification Type:<BR>
+					<select class="SHOWME" id="NoteType" onChange="myUpdate();ReVis();HideBC();ETS();" >
+                        <option label=" "></option>
+						<option class="NoEBMode" value="Initial">Initial Notification</option>
+						<option class="NoEBMode" value="Update Before">Update: Tech Arrival/En Route</option>
+						<option class="YesEBMode displayNone" value="EBTechNot">Tech Access Issues/En Route</option> 
+						<option class="NoEBMode" value="Update After">Update: Hourly Update</option>
+						<option class="YesEBMode displayNone" value="Update After">Initial Everbridge/Hourly Update</option>
+						<option class="YesEBMode" value="PSQMTA">Commercial Power Updates</option>
+						<option class="NoEBMode" value="Monitoring">Monitoring</option>
+						<option class="NoEBMode" value="RepY6">Repeat Y6 Email</option>
+						<option class="NoEBMode" value="RepOut">Repeat Outage Email</option>
+						<option class="NoEBMode" value="IRIS">IRIS</option>
+						<option class="NoEBMode" value="ENOC/ETS">ENOC/ETS Update</option>
+					</select>
+			    </div>
+            </section>
+
 <!--ETS section-->
+            <section>
                     <div class="row displayNone ETS">
                         <div class="cell">Fiber Count Total</div>
                         <div class="cell"><input type="text" id="ETSTotal" onchange="ETS();"></div>
@@ -86,7 +89,10 @@
                     <div class="row displayNone ETS">
                         <div class="cell">Current Status</div>
                         <div class="cell"><textarea id="ETSCurrent" onchange="ETS();"></textarea></div>
-                    </div> 
+                    </div>
+
+            </section>
+ 
 <!--Repeat outage info-->
                     <div class="row displayNone Fiorm Reppy6">
                         <div class="cell" style="text-align: right;">How Many Y6 Repeats: </div>

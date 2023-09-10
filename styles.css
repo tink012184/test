@@ -75,6 +75,8 @@ footer div {text-align: left;}
 
 .logo{
 	float: left;
+	height: auto;
+	width: 200px;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;

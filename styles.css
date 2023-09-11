@@ -125,16 +125,11 @@ h1{
 }
 
 .column {
-	float: left;
-	width: 100%;
-  }
-  
-  .left, .right {
-	width: 30%;
-  }
-  
-  .middle {
-	width: 30%;
+	flex: 33.33%;
+	height: 100%;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
   }
 
 /* Menu Styles */

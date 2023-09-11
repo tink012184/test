@@ -124,6 +124,19 @@ h1{
 	background-color: yellow;
 }
 
+.column {
+	float: left;
+	width: 100%;
+  }
+  
+  .left, .right {
+	width: 30%;
+  }
+  
+  .middle {
+	width: 30%;
+  }
+
 /* Menu Styles */
 
 .Section {

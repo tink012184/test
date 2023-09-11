@@ -19,1093 +19,1105 @@
 
         <main>
 <!--<div class="cell" style="padding-top: 10px; padding-left: 25px;display:block;width: 550px"></div>-->
-            <section>
-                <div class="cell"> <input type="button" id="EverButton" width="3000" value="Everbridge? [ ]" onclick="Everbridge()" />
-                    <input class="displayNone" type="checkbox" id="EverbridgeMode" /><BR><BR><center><a class="EBLink displayNone" id="EBLnk" target=_new href="https://authentication.everbridge.net/cas/saml/login/censmanager?casSaml=true&disco=true&service=https://manager.everbridge.net/docms/j_spring_cas_security_check">Everbridge</a></center>
-                </div>
-            </section>
 
-            <section>
-                <div class="cell">Notification Type:<BR>
-					<select class="SHOWME" id="NoteType" onChange="myUpdate();ReVis();HideBC();ETS();" >
-                        <option label=" "></option>
-						<option class="NoEBMode" value="Initial">Initial Notification</option>
-						<option class="NoEBMode" value="Update Before">Update: Tech Arrival/En Route</option>
-						<option class="YesEBMode displayNone" value="EBTechNot">Tech Access Issues/En Route</option> 
-						<option class="NoEBMode" value="Update After">Update: Hourly Update</option>
-						<option class="YesEBMode displayNone" value="Update After">Initial Everbridge/Hourly Update</option>
-						<option class="YesEBMode" value="PSQMTA">Commercial Power Updates</option>
-						<option class="NoEBMode" value="Monitoring">Monitoring</option>
-						<option class="NoEBMode" value="RepY6">Repeat Y6 Email</option>
-						<option class="NoEBMode" value="RepOut">Repeat Outage Email</option>
-						<option class="NoEBMode" value="IRIS">IRIS</option>
-						<option class="NoEBMode" value="ENOC/ETS">ENOC/ETS Update</option>
-					</select>
-			    </div>
-            </section>
-
-<!--ETS section-->
-            <section>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Fiber Count Total</div>
-                        <div class="cell"><input type="text" id="ETSTotal" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">&nbsp&nbsp&nbsp&nbsp# of /bundles and count</div>
-                        <div class="cell"><input type="text" id="ETSCount" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Type of Damage/Cause</div>
-                        <div class="cell"><input type="text" id="ETSCaused" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">&nbsp&nbsp&nbsp&nbsp# of damage locations</div>
-                        <div class="cell"><input type="text" id="ETSNumLoc" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Damage Location (Address)</div>
-                        <div class="cell"><input type="text" id="ETSAdd" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell" style="vertical-align: top;"></div>
-                        <div class="cell">Ariel <input value="Ariel" type="radio" name="ArielorUnder" id="ETSAriel" onChange="ETS();" />&nbsp&nbspUnderground <input value="Underground" type="radio" name="ArielorUnder" id="ETSUnder" onChange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell" style="vertical-align: top;"></div>
-                        <div class="cell">Permanent <input value="Permanent" type="radio" name="ETSPorT" id="ETSPerm" onChange="ETS();" />&nbsp&nbsp&nbspTemporary <input value="Temporary" type="radio" name="ETSPorT" id="ETSTemp" onChange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Ability to Prioritize/Reroute TSP or Premier/CTBH Customer Circuits? (if applicable)</div>
-                        <div class="cell"><input type="text" id="ETSCx" onchange="ETS();"></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Challenges</div>
-                        <div class="cell"><textarea id="ETSChallenges" onchange="ETS();"></textarea></div>
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">ETR</div>
-                        <input class="cell2" type="datetime-local" id="ETSETR" value="1969-01-01T00:00" onChange="TimeUp('future',ETSETR.value,'ETSETR'); ETS();">(MT)
-                    </div>
-                    <div class="row displayNone ETS">
-                        <div class="cell">Current Status</div>
-                        <div class="cell"><textarea id="ETSCurrent" onchange="ETS();"></textarea></div>
-                    </div>
-
-            </section>
- 
-<!--Repeat outage info-->
-                    <div class="row displayNone Fiorm Reppy6">
-                        <div class="cell" style="text-align: right;">How Many Y6 Repeats: </div>
-                        <div class="cell" align="left">
-                        <select id="NumRepsY6" onChange="RepUpdate();ReVis();">
-                            <Option value="0"></option>
-                            <Option value="1">Tier1: 1 Repeat (2 Y6's on Same Account)</option>
-                            <Option value="2">Tier2: 2 Repeats (3 Y6's on Same Account)</option>
-                            <Option value="3">Tier3: 3 Repeats (4 Y6's on Same Account)</option>
-                            <Option value="4">Tier 4: 4+ Repeats (5+ Y6's on Same Account)</option>
-                        </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row displayNone Fiorm RepZV">
-                        <div class="cell" style="text-align: right;">How Many Repeat Outages: </div>
-                        <div class="cell" align="left">
-                        <select id="NumRepsZV" onChange="RepUpdate();ReVis();RepeatBreadCrumb();">
-                            <Option value="00000"></option>
-                            <Option>Tier1: 5th SSA in 24 hrs</option>
-                            <Option>Tier1: 6th unplanned outages in 10 days</option>
-                            <Option>Tier2: 6th SSA in 24 hrs</option>
-                            <Option>Tier2: 7th unplanned outages in 10 days</option>
-                            <Option>Tier3: 7th SSA in 24 hrs</option>
-                            <Option>Tier3: 8th unplanned outages in 10 days</option>
-                            <Option>Tier4: 8th+ SSA in 24 hrs</option>
-                            <Option>Tier4: 9th+ unplanned outages in 10 days</option>
-                        </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row displayNone Fiorm Reppy6a RepZVa">
-                        <div class="cell" style="text-align: right;">MA: </div>
-                        <div class="cell" align="left">
-                        <select class="SHOWME" id="MA" onChange="HubLoad(this.value);" >
-                            <option value=""></option>
-                            <Option value="Mountain States">Mountain States</option>
-                            <Option value="Pacific Northwest">Pacific Northwest</option>
-                            <Option value="Sierra Nevada">Sierra Nevada</option>
-                        </Select></div>
-                    </div>
-                    
-                    <div class="row displayNone Fiorm Reppy6a RepZVa">
-                        <div class="cell" style="text-align: right;">HUB: </div>
-                        <div class="cell" align="left">
-                        <Select id="HubHub" onChange="RepUpdate();RepeatBreadCrumb();">
-                            <option value="">&nbsp;</option>
-                        </Select></div>
-                    </div>				
-    
-                    <div class="row displayNone Fiorm Reppy6a RepZVa">
-                        <div class="cell" style="text-align: right;">Node Name: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepNode" style="width: 300px;" onChange="RepUpdate();RepeatBreadCrumb();" /></div>
-                    </div>
-                    
-                    <div class="row displayNone Fiorm Reppy6a RepZVa">
-                        <div class="cell" style="text-align: right;">Lighthouse Order #: </div>
-                        <div class="cell2" align="left">
-                        <input maxlength="20" type="number" id="RepLH" style="width: 300px;" onChange="HowMany(this.id);RepUpdate();" /></div>
-                    </div>
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Technician Name: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepTech" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>
-    
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Repeat Outage Detail(What, When, Where): </div>
-                        <div class="cell" align="left">
-                        <textarea id="RepZVComments" cols="15" rows="5" onChange="RepUpdate();RepeatBreadCrumb();"></textarea>
-                        
-                        </div>
-                    </div>		
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Enter the following for the last 10 days: </div>
-                    </div>
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Number of Outages: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepOutages" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Number of Y6's: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepY6" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Number of Y7's: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepY7" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>	
-                    <div class="row displayNone Fiorm RepZVa">
-                        <div class="cell" style="text-align: right;">Number of ZZ's: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepZZ" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>		
-                    <div class="row displayNone Fiorm Reppy6a">
-                        <div class="cell" style="text-align: right;">Customer's Account #: </div>
-                        <div class="cell2" align="left">
-                        <input type="number" id="RepCustAcct" style="width: 300px;" onChange="HowMany(this.id);RepUpdate();" /></div>
-                    </div>
-    
-                    <div class="row displayNone Fiorm Reppy6a">
-                        <div class="cell" style="text-align: right;">Customer's Address: </div>
-                        <div class="cell" align="left">
-                        <input type="text" id="RepCustAddy" style="width: 300px;" onChange="RepUpdate();" /></div>
-                    </div>
-<!--Repeat Y6's section for pervious orders-->
-                    <div class="row displayNone Reppy6a">
-                        <div class="cell">Number of Orders </div>
-                        <div class="cell">
-                            <select id="NUMOrders" onChange="PreLHWO();">
-                                <option label=" "></option>
-                                <option label="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row displayNone Reppy6a">&nbsp</div>
-                    <div class="row displayNone Reppy6a">&nbsp</div>	
-                    <div class="row displayNone Reppy6a">&nbsp</div>
-                    <div class="row displayNone Reppy6a">&nbsp</div>
-                    <div class="row displayNone Reppy6a">&nbsp</div>
-                    <div class="row displayNone Reppy6a">&nbsp</div>		
-                    <div class="row">
-                        <div class="cell displayNone Reppy6a " style="text-align: left;">Previous Lighthouse Order #: </div>
-                        <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Type: </div>
-                        <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Resolution: </div>
-                        <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO was Resolved By: </div>
-                        <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Resolution Comments: </div>
-                        <div class="cell displayNone Reppy6a" style="text-align: left;">Previous Y6 WO Referral Reason: </div>
-                    </div>
-                    <div class="row displayNone OneOrder">
-                        <div class="cell">
-                        <input type="text" id="a01" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="b01" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="c01" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="d01" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="e01" onchange="PreLHWO();"></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f01" onchange="PreLHWO();"></div>
-                    </div>
-                    <div class="row displayNone TwoOrder">
-                        <div class="cell">
-                        <input type="text" id="a02" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="b02" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="c02" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="d02" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="e02" onchange="PreLHWO();"></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f02" onchange="PreLHWO();"></div>
-                    </div>
-                    <div class="row displayNone ThreeOrder">
-                        <div class="cell">
-                        <input type="text" id="a03" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="b03" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="c03" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="d03" onchange="PreLHWO();"></div>
-                        <div class="cell">
-                        <input type="text" id="e03" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f03" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone FourOrder">
-                        <div class="cell">
-                        <input type="text" id="a04" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b04" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c04" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d04" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e04" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f04" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone FiveOrder">
-                        <div class="cell">
-                        <input type="text" id="a05" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b05" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c05" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d05" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e05" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f05" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone SixOrder">
-                        <div class="cell">
-                        <input type="text" id="a06" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b06" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c06" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d06" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e06" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f06" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone SevenOrder">
-                        <div class="cell">
-                        <input type="text" id="a07" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b07" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c07" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d07" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e07" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f07" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone EightOrder">
-                        <div class="cell">
-                        <input type="text" id="a08" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b08" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c08" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d08" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e08" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f08" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone NineOrder">
-                        <div class="cell">
-                        <input type="text" id="a09" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b09" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c09" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d09" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e09" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f09" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone TenOrder">
-                        <div class="cell">
-                        <input type="text" id="a10" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="b10" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="c10" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="d10" onchange="PreLHWO(); "></div>
-                        <div class="cell">
-                        <input type="text" id="e10" onchange="PreLHWO(); "></div>
-                        <div class="cell displayNone Reppy6a">
-                        <input type="text" id="f10" onchange="PreLHWO(); "></div>
-                    </div>
-                    <div class="row displayNone Fiorm INITUPDATE NSTANDBY DISPATCHGA" name="testi">
-                        <div class="cell" style="text-align: right;">Technician Name: </div>
-                        <div class="cell" align="left"><input type="text" id="IQ1" onChange="myUpdate();" /> 
-                            <input type="checkbox" id="IQ1-VM" onChange="VM();myUpdate();" /> Voicemail?</div>
-                            <!-- <div class="cell" align="left"><input type="checkbox" id="PendTech" onChange="myUpdate();" /> Pending Tech </div> -->
-                    </div>
-    
-                    <div class="row displayNone Fiorm ONsiteNot">
-                        <div class="cell" style="text-align: right;">On Site or Not on Site: </div>
-                        <div class="cell">
-                            <select id="OR" onChange="myUpdate();" >
-                                <option label=" "></option>
-                                <option value=" is on site. ">is on site</option>
-                                <option value=" is not on site. ">is not on site</option>
-                            </select>
-                        </div>					
-                    </div>
-    
-                    <div class="row displayNone Fiorm VMINIT VMUPDATE NORIG INIT NSTANDBY DISPATCHGA">
-                        <div class="cell" style="text-align: right;">ETA?: </div>
-                        <div class="cell2" align="left"><input type="checkbox" id="IQ2a" onChange="myUpdate();UnkNow(this.id,'IQ2');" /> Unknown
-                        <BR>
-                        <input type="datetime-local" id="IQ2" value="1969-01-01T00:00" onChange="TimeUp('future',IQ2.value,'IQ2');myUpdate();" /> (MT)</div>
-                    </div>
-<!---Begin: Single / Multi Node--->
-        <div class="row displayNone Fiorm INIT DISPATCHGA">
-            <div class="cell" style="text-align: right;">Single or Multi Node?: </div>
-            <div class="cell">
-                    <select id="IQ3" onChange="myUpdate();SingleMulti();" >
-                        <option label=" "></option>
-                        <option value="single">Single</option>
-                        <option value="multiple">Multiple</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm  ISUB MULTI NQMTAPS">
-            <div class="cell" style="text-align: right;">• Dual dispatch initiated?: </div>
-            <div class="cell">
-                    <select id="IQ3a" onChange="myUpdate();DualDisp();" >
-                        <option label=" "></option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                </select>
-            </div>
-        </div>				
-
-        <div class="row displayNone Fiorm ISUB MULTI2 NQMTAPS">
-            <div class="cell" style="text-align: right;">• LBI impacted?: </div>
-            <div class="cell">
-                    <select id="IQ3b" onChange="myUpdate();LBI();" >
-                        <option label=" "></option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                </select>
-            </div>
-        </div>				
-
-        <div class="row displayNone Fiorm  ISUB LBI">
-            <div class="cell" style="text-align: right;">• How many?: </div>
-            <div class="cell" align="left"><input type="number" id="IQ3bi" onChange="myUpdate();HowMany(this.id);" /></div>
-        </div>				
-
-        <!---End: Single / Multi Node--->
-
-        <!---Power Supply Detail--->
-        <div class="row displayNone Fiorm INIT DISPATCHGA">
-            <div class="cell" style="text-align: right;">Power Supply Status?: </div>
-            <div class="cell">
-                    <select id="IQ4" onChange="myUpdate();CPOETR();" >
-                        <option label=" "></option>
-                        <option value="is online">Online</option>
-                        <option value="is offline">Offline</option>
-                        <option value="shows both online and offline power supplies">Online/Offline Combo</option>
-                        <option value="is in stand-by">Stand-by</option>
-                        <option value="is unknown">Not in Continuity</option>
-                </select>
-            </div>
-        </div>				
-
-        <div class="row displayNone Fiorm MULTIPS">
-            <div class="cell"></div>
-            <div class="cell" align="left">PS in stand-by for <B>all</B> nodes? <input type="checkbox" id="IQ4c" onChange="myUpdate();CPOETR();" /></div>
-        </div>
-
-        <div class="row displayNone Fiorm ISUB STANDBY QMTA2">
-            <div class="cell" style="text-align: right;">• Commercial Power Co.<BR> &nbsp&nbsp&nbsp&nbsp Website ETR?: </div>
-            <div class="cell2" align="left"><input type="checkbox" id="IQ4b" onChange="myUpdate();UnkNow(this.id,'IQ4a');" />Unknown
-            <BR>
-            <input type="datetime-local" id="IQ4a" value="1969-01-01T00:00" onChange="TimeUp('future',IQ4a.value,'IQ4a');myUpdate();" /> (MT)</div>
-        </div>
-        <!---End: Power Supply Detail--->
-
-
-
-
-        <!---End INITIAL Section--->
-
-
-        <!---Start Update Section--->
-        <div class="row displayNone Fiorm BEFORE VMUPDATE VM NAFTER UPDATE PSGEN">
-            <div class="cell" style="text-align: right;">Is tech on site?: </div>
-            <div class="cell">
-                    <select id="UQ1" onChange="myUpdate();OnSite();" >
-                        <option label=" "></option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                </select>
-            </div>
-        </div>
-
-        <!---Tech Onsite: Yes--->
-        <div class="row displayNone Fiorm VMUPDATE ONSITE USUB">
-            <div class="cell" style="text-align: right;">• Onsite Time?: </div>
-            <div class="cell2" align="left"><input type="datetime-local" id="UQ1a" value="1969-01-01T00:00" onChange="TimeUp('past',UQ1a.value,'UQ1a');myUpdate();" /> (MT)</div>
-
-        </div>	
-
-        <div class="row displayNone Fiorm VMUPDATE ONSITE AFTER">
-            <div class="cell ISWAS" style="text-align: right;">What is the cause?: </div>
-            <div class="cell WASIS displayNone" style="text-align: right;">What was the cause?: </div>
-            <div class="cell">
-                    <select id="UQ4" onChange="CommPwr();myUpdate();" >
-                        <option label=" "></option>
-                        <option value="due to third party damage">Third Party Damage</option>
-                        <option value="due to commercial power">Commercial Power</option>
-                        <option value="due to a power issue at the location">Location Power</option>
-                        <option value="due to a power supply fault">Power Supply Fault</option>
-                        <option value="due to a power supply failure">Power Supply Failure</option>
-                        <option value="due to equipment failure">Equipment Failure</option>
-                        <option value="due to animal chew/damage">Animal Chew/Damage</option>
-                        <option value="due to a storm in the area">Storm</option>
-                        <option value="due to a fire in the area">Fire</option>
-                        <option value="due to a planned maintenance overrun">Planned Maintenance Overrun</option>
-                        <option value="due to a configuration error">Configuration Error</option>
-                        <option value="due to vandalism">Vandalism</option>
-                        <option class="NoEBMode" value="due to student move outs">Student Move Outs</option>
-                        <option class="NoEBMode" value="due to NON-Pay Power disconnects">Non Pay Power Disconnects</option>
-                        <option class="NoEBMode" value="due to single customer issues">Single CX Issues</option>
-                        <option value="due to a vehicle accident">Vehicle Accident</option>
-                        <option class="NoEBMode" value="cleared before testing">Cleared Before Testing (CBT)</option>
-                        <option class="NoEBMode" value="cleared while testing">Cleared While Testing (CWT)</option>
-                        <option value="being investigated">Unknown</option>
-                </select>
-            </div>
-        </div>				
-
-        <!---Tech Onsite: No--->			
-        <div class="row displayNone Fiorm VMUPDATE NONSITE USUB PSGEN">
-            <div class="cell">• Is there an access issue?: </div>
-            <div class="cell">
-                    <select id="UQ1b" onChange="myUpdate();AccessIssue();" >
-                        <option label=" "></option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm VMUPDATE NACCESS USUB">
-            <div class="cell">• Who is preventing access?: </div>
-            <div class="cell">
-                    <select id="UQ1bii" onChange="myUpdate();" >
-                        <option label=" "></option>
-                        <option value="the police department">Police</option>
-                        <option value="the fire department">Fire</option>
-                        <option value="the power company">Power Company</option>
-                        <option value="lack of building access">Building Access</option>
-                        <option value="a storm">Storm</option>
-                        <option value="a hazardous area">Hazardous Area</option>
-                        <option value="a 3rd party contractor">3rd Party Contractor</option>
-                </select>
-            </div>
-        </div>
-        <!--For monitoring option -->
-        <div class="row displayNone Fiorm Monitoring">
-            <div class="cell" style="text-align: right;">What type of monitoring?: </div>
-            <div class="cell">
-                    <select id="Mon" onChange="myUpdate();MonitoringNAccess();" >
-                        <option label=" "></option>
-                        <option value="due to student move outs">Student Move Out</option>
-                        <option value="due to NON-Pay Power Disconnects">NON-Pay Power Disconnects</option>
-                        <option value="due to single customer issues">Single CX Issues</option>
-                        <option value="due to no access at the location">No Access</option>
-                </select>
-            </div>
-        </div>				
-        <div class="row displayNone Fiorm WhyNoAccessP">
-                <div class="cell" style="vertical-align: top; text-align: right;">What is the access issue? </div>
-                <div class="cell" align="left"><input type="text" style="width: 300px;" id="preAccess" onChange="myUpdate();"></div>
-        </div>	
-        <div class="row displayNone Fiorm VMUPDATE NACCESS USUB WhyNoAccessP WhyNoAccessN NOAccess">
-            <div class="cell">• Access ETA?: </div>
-            <div class="cell" align="left"><input type="checkbox" id="UNAccess" onChange="myUpdate();UnkNow(this.id,'UQ1bi');" />Unknown
-                <br>
-                <input type="datetime-local" id="UQ1bi" value="1969-01-01T00:00" onChange="TimeUp('future',UQ1bi.value,'UQ1bi');myUpdate();" /> (MT)</div>
-        </div>			
-        <div class="row displayNone Fiorm ACCESS USUB">
-            <div class="cell">• ETA?: </div>
-            <div class="cell" align="left"><input type="checkbox" id="UNETA" onChange="myUpdate();UnkNow(this.id,'UQ1c');" />Unknown
-                <br>
-                <input type="datetime-local" id="UQ1c" value="1969-01-01T00:00" onChange="TimeUp('future',UQ1c.value,'UQ1c');myUpdate();" /> (MT)
-                <BR>
-            <div class= "NoEBMode Fiorm ACCESS USUB">
-                • CBT? <input type="checkbox" id="CBTB4" onChange="CBTBefore();myUpdate();" />
-            </div>
-            </div>
-        </div>
-        <div class="row displayNone YesEBMode">
-            <div class="cell3">Are we updating Hourly???</div>
-            <div class="cell3"><input type="checkbox" id="hourly" onchange="myUpdate();"> </div>
-        </div>
-        <div class="row displayNone YesEBMode">
-            <div class="cell">Start time in Remedy</div>
-            <div class="cell2"><input type="datetime-local" id="startTime" value="1969-01-01T00:00" onchange="timediff();"> </div>
-        </div>
-        <div class="row displayNone YesEBMode">
-            <div class="cell"></div>
-            <div class="cell"><textarea id="TimeDifferance" rows="1" cols="15" style="overflow: hidden; width: 300px;background-color: #dddddd;" readonly></textarea></div>
-        </div>
-
-
-        <div class="row displayNone Fiorm VMUPDATE NAFTER ONSITE NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
-            <div class="cell" style="text-align: right;">Plant Type: </div>
-            <div class="cell">
-                    <select id="UQ2" onChange="myUpdate();PlantType();" >
-                        <option label=" "></option>
-                        <option value="aerial ">Aerial</option>
-                        <option value="underground ">Underground</option>
-                        <option value="both aerial and underground ">Both Aerial and Underground</option>	
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm VMUPDATE SUBTYPE USUB NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
-            <div class="cell" style="text-align: right;">• Sub-Type: </div>
-            <div class="cell">
-                    <select id="UQ2a" onChange="myUpdate();" >
-                        <option label=" "></option>
-                        <option value=" at a street crossing.">Street Crossing</option>
-                        <option value=" near a right of way/parallel.">Right of Way/Parallel</option>
-                        <option value=" in a rear easement.">Rear Easement</option>
-                        <option value=" in a front easement.">Front Easement</option>
-                        <option value=".">N/A</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm VMUPDATE NAFTER ONSITE NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
-            <div class="cell" style="text-align: right;">Outage Type: </div>
-            <div class="cell">
-                    <select id="UQ3" onChange="myUpdate();" >
-                        <option label=" "></option>
-                        <option value="coaxial lines">Coax</option>
-                        <option value="fiber lines ">Fiber</option>
-                        <option value="coaxial and fiber lines">Coax and Fiber</option>
-                        <option value="transport ">Transport</option>
-                        <option value="third party fiber">3rd Party Fiber</option>
-                        <option value="third party transport">3rd Party Transport</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
-            <div class="cell">&nbsp;</div>
-            <div class="cell">Dual Dispatch Engaged: <input type="checkbox" id="DualCheck" onChange="DualTwo();myUpdate();" /><BR>
-            
-            
-            
-            <p class="LBI2 displayNone">• LBI Impacted?: <input type="checkbox" id="ElBeeEye" onChange="DualTwo();myUpdate();"></p>
-            <p class="Howm displayNone">• How Many?: <input type="number" id="HowMany2" onChange="HowMany(this.id);myUpdate();" /></p>
-
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
-            <div class="cell" style="vertical-align: top;"><BR>Technician Update: </div>
-        </div>
-
-                
-
-
-        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
-            <div class="cell" style="vertical-align: top;text-align: right;">What did the tech do?: </div>
-            <div class="cell" style="vertical-align: top;">
-            <I><font color=white>"They have <input type="text" style="width: 215px;" id="UA1" onChange="myUpdate();" /></I></font>
-            </div>
-        </div>				
-
-        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
-            <div class="cell" style="vertical-align: top; text-align: right;">Where was the work done?: </div>
-            <div class="cell" style="vertical-align: top;">
-            <I><font color=white>at <input type="text" style="width: 283px;" id="UA2" onChange="myUpdate();" /></I></font></div>
-        </div>
-
-        <div class="row displayNone Fiorm AFTER NFINAL NEXTSTEPS PSGEN GENTI CPOTy">
-            <div class="cell" style="vertical-align: top; text-align: right;">Tech's next steps?: </div>
-            <div class="cell" style="vertical-align: top;"><I><font color=white>and will continue to<BR><input type="text" style="width: 285px;" id="UA3" onChange="myUpdate();" />."</I></font></div>
-        </div>
-
-        <div class="row displayNone Fiorm FINAL F2 F22 PSGEN">
-            <div class="cell" style="vertical-align: top;"></div>
-            <div class="cell" style="vertical-align: top;"><I><font color=white>which has resolved the outage."</I></font></div>
-        </div>
-
-        <div class="row displayNone Fiorm PSQMTAopt1 PSH PSo">
-            <div class="cell" style="text-align: right;">Technician Name: </div>
-            <div class="cell" align="left"><input type="text" id="PTechN" onChange="CPUExec(PSQMTA1.value);" /> <input type="checkbox" id="PS1-VM" onChange="PSVM();CPUExec(PSQMTA1.value);" /> Voicemail? </div>
-        </div>
-
-        <div class="row displayNone Fiorm PSQMTA PSH">
-            <div class="cell" style="text-align: right;">Power Issue Type: </div>
-            <div class="cell">
-                    <select id="PSQMTA1" onChange="myUpdate();Power();" >
-                        <option label=" "></option>
-                        <option value="CPO">Commercial Power Outage</option>
-                        <option value="GEN">Generator Tracking</option>
-                        <option value="PS">Power Supply in Stand-By</option>
-                        <option value="QMTAUPDATE">QMTA</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm CPO PSH">
-            <div class="cell" style="text-align: right;">Commercial Power Outage: </div>
-            <div class="cell">
-                    <select id="CPO1" onChange="myUpdate();CPU1();" >
-                        <option label=" "></option>
-                        <option value="No Change">No Change</option>
-                        <option value="More Devices">Change: More Devices Offline</option>
-                        <option value="Partial">Change: Partial Recovery</option>
-                        <option value="6HourOut">6-Hour Send Re-Verification</option>
-                        <option value="IRIS">IRIS Event During CPO</option>
-                        <option value="Reverified">CPO Re-Verified</option>
-                        <option value="Restored">Power Restored</option>
-                        <option value="Power Restored but Monitoring">Power Restored but Monitoring</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm GEN PSH">
-            <div class="cell" style="text-align: right;">Generator Ticket: </div>
-            <div class="cell">
-                    <select id="GEN1" onChange="myUpdate();CPU2();" >
-                        <option label=" "></option>
-                        <option value="No Change">No Change</option>
-                        <option value="Refuel">Refuel Dispatch</option>
-                        <option value="Refuel Complete">Refuel Complete</option>
-                        <option value="Pickup">Generator Pickup</option>
-                        <option value="PickupComplete">Generator Pickup Completed</option>
-                </select>
-            </div>
-        </div>				
-
-        <div class="row displayNone Fiorm PS PSH">
-            <div class="cell" style="text-align: right;">PS in Stand-By: </div>
-            <div class="cell">
-                    <select id="PS1" onChange="myUpdate();CPU3();" >
-                        <option label=" "></option>
-                        <option value="Standby">At Least 1 Hour Remains</option>
-                        <option value="Less">Less than 1 Hour Remains</option>
-                        <option value="Offline">Power Supply has Fallen Offline</option>
-                        <option value="OnOut">PS Online, Outage Remains</option>
-                        <option value="OnRest">PS Online, Restored</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm QMTAUPDATE PSH">
-            <div class="cell" style="text-align: right;">QMTA: </div>
-            <div class="cell">
-                    <select id="QMTA1" onChange="myUpdate();CPU4();" >
-                        <option label=" "></option>
-                        <option value="Valid">QMTA Still Valid</option>
-                        <option value="Failed">QMTA Offline</option>
-                        <option value="Outage">QMTA Online, Outage Remains</option>
-                        <option value="Online">QMTA Online, Outage Restored</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row displayNone Fiorm PSQMTAopt5 PSH PSo">
-            <div class="cell"></div>
-            <div class="cell" align="left"><input type="checkbox" id="NoGen" onChange="CPUExec(PSQMTA1.value);" /> No Generator Available</div>					
-        </div>
-
-        <div class="row displayNone Fiorm PSQMTAopt2 PSH PSo">
-            <div class="cell" style="text-align: right;">ZX-Plant Other LH: <BR><font size=1><I>(YD-Storm Assessment for Storm)</I></font></div>
-            <div class="cell2" align="left"><input maxlength="20" type="number" id="ZX" onChange="HowMany(this.id);CPUExec(PSQMTA1.value);" /> </div>
-        </div>
-        <div class="row displayNone Fiorm COMMPOWER CPOR NLP">
-            <div class="cell" style="text-align: right;">Source of Restoration Time: </div>
-            <div class="cell">
-                    <select id="CPOT" onChange="myUpdate();CPU1();CommPwr();CPOType();" >
-                        <option label=" "></option>
-                        <option value="6 Hour Re-Verification due at ">6 Hour Re-Verification</option>
-                        <option value="Power company website ETR is ">Power Company Website</option>
-                        <option value="The ETR is provided by the technician is at ">Provided By Technician</option>
-                </select>
-            </div>
-        </div>
-        <div class="row displayNone Fiorm PSQMTAopt3 PSH PSo NOSHOW">
-            <div class="cell displayNone PSM" style="text-align: right;">ETR?</div>
-            <div class="cell displayNone CPOR" style="text-align: right;">CPO 6-hr Reverify Time or ETR?: <BR><font size=1><I>(6-Hours after last verification)</I></font> </div>
-            <div class="cell NCPOR" style="text-align: right;">Tech ETA?: </div>
-            <div class="cell" align="left"><input type="checkbox" id="CPUETAa" onChange="myUpdate();CPUExec(PSQMTA1.value);UnkNow(this.id,'CPUETA')" />Unknown
-            <BR>
-            <input class="cell2" type="datetime-local" id="CPUETA" value="1969-01-01T00:00" onChange="TimeUp('future',CPUETA.value,'CPUETA');CPUExec(PSQMTA1.value);" /> (MT)</div>
-        </div>
-
-
-
-
-
-
-
-        <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NLP">
-            <div class="cell" style="text-align: right;">• Power Co. Name: </div>
-            <div class="cell" align="left"><input type="text" id="UQ4a" onChange="myUpdate();"></div>
-        </div>
-
-        <div class="row displayNone Fiorm COMMPOWER USUB NLP">
-            <div class="cell" style="text-align: right;">• Power Co. On Site?: </div>
-            <div class="cell">
-                    <select id="UQ4b" onChange="myUpdate();" >
-                        <option label=" "></option>
-                        <option value="on">Yes</option>
-                        <option value="not on">No</option>
-                </select>
-            </div>
-        </div>	
-
-        <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB    NFIN AL NPSF">
-            <div class="cell NLP" style="text-align: right;">• ETR: </div>
-            <div class="cell LP displayNone" style="text-align: right;">• Location Power ETR: </div>
-            <div class="cell" align="left"><input type="checkbox" id="UQ4ci" onChange="myUpdate();UnkNow(this.id,'UQ4c');" />Unknown
-            <BR>
-            <input class="cell2" type="datetime-local" id="UQ4c" value="1969-01-01T00:00" onChange="TimeUp('future',UQ4c.value,'UQ4c');myUpdate();" /> (MT)</div>
-        </div>
-        <div class="row displayNone Fiorm PSF">
-            <div class="cell" style="text-align: right;">• What is the Fault?: </div>
-            <div class="cell">
-                    <select id="PSFR" onChange="myUpdate();" >
-                        <option label=" "></option>
-                        <option value="breaker tripped">Breaker Tripped</option>
-                        <option value="batteries failed">Batteries Failed</option>
-                        <option value="had inverter faulure">Inverter Issues</option>
-                </select>
-            </div>
-        </div>	
-
-
-        <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NoPSF">
-            <div class="cell" style="vertical-align: top; text-align: right;">• Verification Address: </div>
-            <div class="cell" align="left"><input type="text" width=400 id="UQ4d" onChange="myUpdate();"></div>
-        </div>
-
-        <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NLP PSF">
-            <div class="cell" align="right" style="vertical-align: top; text-align: right;">Generator Deployed or on Truck Inverter?: </div>
-            <div class="cell" align="left">
-                <select id="UQ4e" onChange="myUpdate();GenDep();OnSite();PSFault();" >
-                    <option value="NA">No</option>
-                    <option value="Yes">Yes Generator</option>
-                    <option value="YesTI">Yes Truck Inverter</option>
-                    <option value="No">No Generator Available</option>
-            </select>
-            </div>
-        </div>
-
-
-
-        <div class="row displayNone QMTAAddressMac">
-            <div class="cell"><input id="btnAdd" type="button" value="Add QMTA Address and MAC" /></div>
             <div class="row">
-                <div class="cell" id="AddBox" onchange="QMTAAddressandMAC()"></div>
-                <div class="cell" id="MACBox" onchange="QMTAAddressandMAC()">
-                <!--Textboxes will be added here 
-            <div class="cell"><input id="btnGet" type="button" value="Compile" /></div>-->
+                <div class="column">
+                    <section>
+                        <div class="cell"> <input type="button" id="EverButton" width="3000" value="Everbridge? [ ]" onclick="Everbridge()" />
+                            <input class="displayNone" type="checkbox" id="EverbridgeMode" /><BR><BR><center><a class="EBLink displayNone" id="EBLnk" target=_new href="https://authentication.everbridge.net/cas/saml/login/censmanager?casSaml=true&disco=true&service=https://manager.everbridge.net/docms/j_spring_cas_security_check">Everbridge</a></center>
+                        </div>
+                    </section>
+                </div>
+                <div class="column">
+                    <section>
+                        <div class="cell">Notification Type:<BR>
+                            <select class="SHOWME" id="NoteType" onChange="myUpdate();ReVis();HideBC();ETS();" >
+                                <option label=" "></option>
+                                <option class="NoEBMode" value="Initial">Initial Notification</option>
+                                <option class="NoEBMode" value="Update Before">Update: Tech Arrival/En Route</option>
+                                <option class="YesEBMode displayNone" value="EBTechNot">Tech Access Issues/En Route</option> 
+                                <option class="NoEBMode" value="Update After">Update: Hourly Update</option>
+                                <option class="YesEBMode displayNone" value="Update After">Initial Everbridge/Hourly Update</option>
+                                <option class="YesEBMode" value="PSQMTA">Commercial Power Updates</option>
+                                <option class="NoEBMode" value="Monitoring">Monitoring</option>
+                                <option class="NoEBMode" value="RepY6">Repeat Y6 Email</option>
+                                <option class="NoEBMode" value="RepOut">Repeat Outage Email</option>
+                                <option class="NoEBMode" value="IRIS">IRIS</option>
+                                <option class="NoEBMode" value="ENOC/ETS">ENOC/ETS Update</option>
+                            </select>
+                        </div>
+                    </section>
+        
+        <!--ETS section-->
+                    <section>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Fiber Count Total</div>
+                                <div class="cell"><input type="text" id="ETSTotal" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">&nbsp&nbsp&nbsp&nbsp# of /bundles and count</div>
+                                <div class="cell"><input type="text" id="ETSCount" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Type of Damage/Cause</div>
+                                <div class="cell"><input type="text" id="ETSCaused" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">&nbsp&nbsp&nbsp&nbsp# of damage locations</div>
+                                <div class="cell"><input type="text" id="ETSNumLoc" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Damage Location (Address)</div>
+                                <div class="cell"><input type="text" id="ETSAdd" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell" style="vertical-align: top;"></div>
+                                <div class="cell">Ariel <input value="Ariel" type="radio" name="ArielorUnder" id="ETSAriel" onChange="ETS();" />&nbsp&nbspUnderground <input value="Underground" type="radio" name="ArielorUnder" id="ETSUnder" onChange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell" style="vertical-align: top;"></div>
+                                <div class="cell">Permanent <input value="Permanent" type="radio" name="ETSPorT" id="ETSPerm" onChange="ETS();" />&nbsp&nbsp&nbspTemporary <input value="Temporary" type="radio" name="ETSPorT" id="ETSTemp" onChange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Ability to Prioritize/Reroute TSP or Premier/CTBH Customer Circuits? (if applicable)</div>
+                                <div class="cell"><input type="text" id="ETSCx" onchange="ETS();"></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Challenges</div>
+                                <div class="cell"><textarea id="ETSChallenges" onchange="ETS();"></textarea></div>
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">ETR</div>
+                                <input class="cell2" type="datetime-local" id="ETSETR" value="1969-01-01T00:00" onChange="TimeUp('future',ETSETR.value,'ETSETR'); ETS();">(MT)
+                            </div>
+                            <div class="row displayNone ETS">
+                                <div class="cell">Current Status</div>
+                                <div class="cell"><textarea id="ETSCurrent" onchange="ETS();"></textarea></div>
+                            </div>
+        
+                    </section>
+         
+        <!--Repeat outage info-->
+                    <section>
+                        <div class="row displayNone Fiorm Reppy6">
+                            <div class="cell" style="text-align: right;">How Many Y6 Repeats: </div>
+                            <div class="cell" align="left">
+                            <select id="NumRepsY6" onChange="RepUpdate();ReVis();">
+                                <Option value="0"></option>
+                                <Option value="1">Tier1: 1 Repeat (2 Y6's on Same Account)</option>
+                                <Option value="2">Tier2: 2 Repeats (3 Y6's on Same Account)</option>
+                                <Option value="3">Tier3: 3 Repeats (4 Y6's on Same Account)</option>
+                                <Option value="4">Tier 4: 4+ Repeats (5+ Y6's on Same Account)</option>
+                            </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row displayNone Fiorm RepZV">
+                            <div class="cell" style="text-align: right;">How Many Repeat Outages: </div>
+                            <div class="cell" align="left">
+                            <select id="NumRepsZV" onChange="RepUpdate();ReVis();RepeatBreadCrumb();">
+                                <Option value="00000"></option>
+                                <Option>Tier1: 5th SSA in 24 hrs</option>
+                                <Option>Tier1: 6th unplanned outages in 10 days</option>
+                                <Option>Tier2: 6th SSA in 24 hrs</option>
+                                <Option>Tier2: 7th unplanned outages in 10 days</option>
+                                <Option>Tier3: 7th SSA in 24 hrs</option>
+                                <Option>Tier3: 8th unplanned outages in 10 days</option>
+                                <Option>Tier4: 8th+ SSA in 24 hrs</option>
+                                <Option>Tier4: 9th+ unplanned outages in 10 days</option>
+                            </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row displayNone Fiorm Reppy6a RepZVa">
+                            <div class="cell" style="text-align: right;">MA: </div>
+                            <div class="cell" align="left">
+                            <select class="SHOWME" id="MA" onChange="HubLoad(this.value);" >
+                                <option value=""></option>
+                                <Option value="Mountain States">Mountain States</option>
+                                <Option value="Pacific Northwest">Pacific Northwest</option>
+                                <Option value="Sierra Nevada">Sierra Nevada</option>
+                            </Select></div>
+                        </div>
+                        
+                        <div class="row displayNone Fiorm Reppy6a RepZVa">
+                            <div class="cell" style="text-align: right;">HUB: </div>
+                            <div class="cell" align="left">
+                            <Select id="HubHub" onChange="RepUpdate();RepeatBreadCrumb();">
+                                <option value="">&nbsp;</option>
+                            </Select></div>
+                        </div>				
+        
+                        <div class="row displayNone Fiorm Reppy6a RepZVa">
+                            <div class="cell" style="text-align: right;">Node Name: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepNode" style="width: 300px;" onChange="RepUpdate();RepeatBreadCrumb();" /></div>
+                        </div>
+                        
+                        <div class="row displayNone Fiorm Reppy6a RepZVa">
+                            <div class="cell" style="text-align: right;">Lighthouse Order #: </div>
+                            <div class="cell2" align="left">
+                            <input maxlength="20" type="number" id="RepLH" style="width: 300px;" onChange="HowMany(this.id);RepUpdate();" /></div>
+                        </div>
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Technician Name: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepTech" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>
+        
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Repeat Outage Detail(What, When, Where): </div>
+                            <div class="cell" align="left">
+                            <textarea id="RepZVComments" cols="15" rows="5" onChange="RepUpdate();RepeatBreadCrumb();"></textarea>
+                            
+                            </div>
+                        </div>		
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Enter the following for the last 10 days: </div>
+                        </div>
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Number of Outages: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepOutages" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Number of Y6's: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepY6" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Number of Y7's: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepY7" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>	
+                        <div class="row displayNone Fiorm RepZVa">
+                            <div class="cell" style="text-align: right;">Number of ZZ's: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepZZ" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>		
+                        <div class="row displayNone Fiorm Reppy6a">
+                            <div class="cell" style="text-align: right;">Customer's Account #: </div>
+                            <div class="cell2" align="left">
+                            <input type="number" id="RepCustAcct" style="width: 300px;" onChange="HowMany(this.id);RepUpdate();" /></div>
+                        </div>
+        
+                        <div class="row displayNone Fiorm Reppy6a">
+                            <div class="cell" style="text-align: right;">Customer's Address: </div>
+                            <div class="cell" align="left">
+                            <input type="text" id="RepCustAddy" style="width: 300px;" onChange="RepUpdate();" /></div>
+                        </div>
+    <!--Repeat Y6's section for pervious orders-->
+                        <div class="row displayNone Reppy6a">
+                            <div class="cell">Number of Orders </div>
+                            <div class="cell">
+                                <select id="NUMOrders" onChange="PreLHWO();">
+                                    <option label=" "></option>
+                                    <option label="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row displayNone Reppy6a">&nbsp</div>
+                        <div class="row displayNone Reppy6a">&nbsp</div>	
+                        <div class="row displayNone Reppy6a">&nbsp</div>
+                        <div class="row displayNone Reppy6a">&nbsp</div>
+                        <div class="row displayNone Reppy6a">&nbsp</div>
+                        <div class="row displayNone Reppy6a">&nbsp</div>		
+                        <div class="row">
+                            <div class="cell displayNone Reppy6a " style="text-align: left;">Previous Lighthouse Order #: </div>
+                            <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Type: </div>
+                            <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Resolution: </div>
+                            <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO was Resolved By: </div>
+                            <div class="cell displayNone Reppy6a " style="text-align: left;">Previous WO Resolution Comments: </div>
+                            <div class="cell displayNone Reppy6a" style="text-align: left;">Previous Y6 WO Referral Reason: </div>
+                        </div>
+                        <div class="row displayNone OneOrder">
+                            <div class="cell">
+                            <input type="text" id="a01" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="b01" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="c01" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="d01" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="e01" onchange="PreLHWO();"></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f01" onchange="PreLHWO();"></div>
+                        </div>
+                        <div class="row displayNone TwoOrder">
+                            <div class="cell">
+                            <input type="text" id="a02" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="b02" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="c02" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="d02" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="e02" onchange="PreLHWO();"></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f02" onchange="PreLHWO();"></div>
+                        </div>
+                        <div class="row displayNone ThreeOrder">
+                            <div class="cell">
+                            <input type="text" id="a03" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="b03" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="c03" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="d03" onchange="PreLHWO();"></div>
+                            <div class="cell">
+                            <input type="text" id="e03" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f03" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone FourOrder">
+                            <div class="cell">
+                            <input type="text" id="a04" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b04" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c04" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d04" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e04" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f04" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone FiveOrder">
+                            <div class="cell">
+                            <input type="text" id="a05" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b05" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c05" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d05" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e05" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f05" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone SixOrder">
+                            <div class="cell">
+                            <input type="text" id="a06" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b06" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c06" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d06" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e06" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f06" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone SevenOrder">
+                            <div class="cell">
+                            <input type="text" id="a07" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b07" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c07" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d07" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e07" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f07" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone EightOrder">
+                            <div class="cell">
+                            <input type="text" id="a08" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b08" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c08" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d08" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e08" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f08" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone NineOrder">
+                            <div class="cell">
+                            <input type="text" id="a09" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b09" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c09" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d09" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e09" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f09" onchange="PreLHWO(); "></div>
+                        </div>
+                        <div class="row displayNone TenOrder">
+                            <div class="cell">
+                            <input type="text" id="a10" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="b10" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="c10" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="d10" onchange="PreLHWO(); "></div>
+                            <div class="cell">
+                            <input type="text" id="e10" onchange="PreLHWO(); "></div>
+                            <div class="cell displayNone Reppy6a">
+                            <input type="text" id="f10" onchange="PreLHWO(); "></div>
+                        </div>
+                    </section>
+
+        <!--Initial notifcation-->
+                    <section>
+                        <div class="row displayNone Fiorm INITUPDATE NSTANDBY DISPATCHGA" name="testi">
+                            <div class="cell" style="text-align: right;">Technician Name: </div>
+                            <div class="cell" align="left"><input type="text" id="IQ1" onChange="myUpdate();" /> 
+                                <input type="checkbox" id="IQ1-VM" onChange="VM();myUpdate();" /> Voicemail?</div>
+                                <!-- <div class="cell" align="left"><input type="checkbox" id="PendTech" onChange="myUpdate();" /> Pending Tech </div> -->
+                        </div>
+        
+                        <div class="row displayNone Fiorm ONsiteNot">
+                            <div class="cell" style="text-align: right;">On Site or Not on Site: </div>
+                            <div class="cell">
+                                <select id="OR" onChange="myUpdate();" >
+                                    <option label=" "></option>
+                                    <option value=" is on site. ">is on site</option>
+                                    <option value=" is not on site. ">is not on site</option>
+                                </select>
+                            </div>					
+                        </div>
+        
+                        <div class="row displayNone Fiorm VMINIT VMUPDATE NORIG INIT NSTANDBY DISPATCHGA">
+                            <div class="cell" style="text-align: right;">ETA?: </div>
+                            <div class="cell2" align="left"><input type="checkbox" id="IQ2a" onChange="myUpdate();UnkNow(this.id,'IQ2');" /> Unknown
+                            <BR>
+                            <input type="datetime-local" id="IQ2" value="1969-01-01T00:00" onChange="TimeUp('future',IQ2.value,'IQ2');myUpdate();" /> (MT)</div>
+                        </div>
+
+        <!---Begin: Single / Multi Node--->
+                        <div class="row displayNone Fiorm INIT DISPATCHGA">
+                            <div class="cell" style="text-align: right;">Single or Multi Node?: </div>
+                            <div class="cell">
+                                    <select id="IQ3" onChange="myUpdate();SingleMulti();" >
+                                        <option label=" "></option>
+                                        <option value="single">Single</option>
+                                        <option value="multiple">Multiple</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm  ISUB MULTI NQMTAPS">
+                            <div class="cell" style="text-align: right;">• Dual dispatch initiated?: </div>
+                            <div class="cell">
+                                    <select id="IQ3a" onChange="myUpdate();DualDisp();" >
+                                        <option label=" "></option>
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>				
+                
+                        <div class="row displayNone Fiorm ISUB MULTI2 NQMTAPS">
+                            <div class="cell" style="text-align: right;">• LBI impacted?: </div>
+                            <div class="cell">
+                                    <select id="IQ3b" onChange="myUpdate();LBI();" >
+                                        <option label=" "></option>
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>				
+                
+                        <div class="row displayNone Fiorm  ISUB LBI">
+                            <div class="cell" style="text-align: right;">• How many?: </div>
+                            <div class="cell" align="left"><input type="number" id="IQ3bi" onChange="myUpdate();HowMany(this.id);" /></div>
+                        </div>				
+                
+        <!---End: Single / Multi Node--->
+                
+        <!---Power Supply Detail--->
+                        <div class="row displayNone Fiorm INIT DISPATCHGA">
+                            <div class="cell" style="text-align: right;">Power Supply Status?: </div>
+                            <div class="cell">
+                                    <select id="IQ4" onChange="myUpdate();CPOETR();" >
+                                        <option label=" "></option>
+                                        <option value="is online">Online</option>
+                                        <option value="is offline">Offline</option>
+                                        <option value="shows both online and offline power supplies">Online/Offline Combo</option>
+                                        <option value="is in stand-by">Stand-by</option>
+                                        <option value="is unknown">Not in Continuity</option>
+                                </select>
+                            </div>
+                        </div>				
+                
+                        <div class="row displayNone Fiorm MULTIPS">
+                            <div class="cell"></div>
+                            <div class="cell" align="left">PS in stand-by for <B>all</B> nodes? <input type="checkbox" id="IQ4c" onChange="myUpdate();CPOETR();" /></div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm ISUB STANDBY QMTA2">
+                            <div class="cell" style="text-align: right;">• Commercial Power Co.<BR> &nbsp&nbsp&nbsp&nbsp Website ETR?: </div>
+                            <div class="cell2" align="left"><input type="checkbox" id="IQ4b" onChange="myUpdate();UnkNow(this.id,'IQ4a');" />Unknown
+                            <BR>
+                            <input type="datetime-local" id="IQ4a" value="1969-01-01T00:00" onChange="TimeUp('future',IQ4a.value,'IQ4a');myUpdate();" /> (MT)</div>
+                        </div>
+        <!---End: Power Supply Detail--->
+                    </section>
+        <!---End INITIAL Section--->
+        
+        <!---Start Update Section--->
+                    <section>
+                        <div class="row displayNone Fiorm BEFORE VMUPDATE VM NAFTER UPDATE PSGEN">
+                            <div class="cell" style="text-align: right;">Is tech on site?: </div>
+                            <div class="cell">
+                                    <select id="UQ1" onChange="myUpdate();OnSite();" >
+                                        <option label=" "></option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <!---Tech Onsite: Yes--->
+                        <div class="row displayNone Fiorm VMUPDATE ONSITE USUB">
+                            <div class="cell" style="text-align: right;">• Onsite Time?: </div>
+                            <div class="cell2" align="left"><input type="datetime-local" id="UQ1a" value="1969-01-01T00:00" onChange="TimeUp('past',UQ1a.value,'UQ1a');myUpdate();" /> (MT)</div>
+                
+                        </div>	
+                
+                        <div class="row displayNone Fiorm VMUPDATE ONSITE AFTER">
+                            <div class="cell ISWAS" style="text-align: right;">What is the cause?: </div>
+                            <div class="cell WASIS displayNone" style="text-align: right;">What was the cause?: </div>
+                            <div class="cell">
+                                    <select id="UQ4" onChange="CommPwr();myUpdate();" >
+                                        <option label=" "></option>
+                                        <option value="due to third party damage">Third Party Damage</option>
+                                        <option value="due to commercial power">Commercial Power</option>
+                                        <option value="due to a power issue at the location">Location Power</option>
+                                        <option value="due to a power supply fault">Power Supply Fault</option>
+                                        <option value="due to a power supply failure">Power Supply Failure</option>
+                                        <option value="due to equipment failure">Equipment Failure</option>
+                                        <option value="due to animal chew/damage">Animal Chew/Damage</option>
+                                        <option value="due to a storm in the area">Storm</option>
+                                        <option value="due to a fire in the area">Fire</option>
+                                        <option value="due to a planned maintenance overrun">Planned Maintenance Overrun</option>
+                                        <option value="due to a configuration error">Configuration Error</option>
+                                        <option value="due to vandalism">Vandalism</option>
+                                        <option class="NoEBMode" value="due to student move outs">Student Move Outs</option>
+                                        <option class="NoEBMode" value="due to NON-Pay Power disconnects">Non Pay Power Disconnects</option>
+                                        <option class="NoEBMode" value="due to single customer issues">Single CX Issues</option>
+                                        <option value="due to a vehicle accident">Vehicle Accident</option>
+                                        <option class="NoEBMode" value="cleared before testing">Cleared Before Testing (CBT)</option>
+                                        <option class="NoEBMode" value="cleared while testing">Cleared While Testing (CWT)</option>
+                                        <option value="being investigated">Unknown</option>
+                                </select>
+                            </div>
+                        </div>				
+                
+                        <!---Tech Onsite: No--->			
+                        <div class="row displayNone Fiorm VMUPDATE NONSITE USUB PSGEN">
+                            <div class="cell">• Is there an access issue?: </div>
+                            <div class="cell">
+                                    <select id="UQ1b" onChange="myUpdate();AccessIssue();" >
+                                        <option label=" "></option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm VMUPDATE NACCESS USUB">
+                            <div class="cell">• Who is preventing access?: </div>
+                            <div class="cell">
+                                    <select id="UQ1bii" onChange="myUpdate();" >
+                                        <option label=" "></option>
+                                        <option value="the police department">Police</option>
+                                        <option value="the fire department">Fire</option>
+                                        <option value="the power company">Power Company</option>
+                                        <option value="lack of building access">Building Access</option>
+                                        <option value="a storm">Storm</option>
+                                        <option value="a hazardous area">Hazardous Area</option>
+                                        <option value="a 3rd party contractor">3rd Party Contractor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--For monitoring option -->
+                        <div class="row displayNone Fiorm Monitoring">
+                            <div class="cell" style="text-align: right;">What type of monitoring?: </div>
+                            <div class="cell">
+                                    <select id="Mon" onChange="myUpdate();MonitoringNAccess();" >
+                                        <option label=" "></option>
+                                        <option value="due to student move outs">Student Move Out</option>
+                                        <option value="due to NON-Pay Power Disconnects">NON-Pay Power Disconnects</option>
+                                        <option value="due to single customer issues">Single CX Issues</option>
+                                        <option value="due to no access at the location">No Access</option>
+                                </select>
+                            </div>
+                        </div>				
+                        <div class="row displayNone Fiorm WhyNoAccessP">
+                                <div class="cell" style="vertical-align: top; text-align: right;">What is the access issue? </div>
+                                <div class="cell" align="left"><input type="text" style="width: 300px;" id="preAccess" onChange="myUpdate();"></div>
+                        </div>	
+                        <div class="row displayNone Fiorm VMUPDATE NACCESS USUB WhyNoAccessP WhyNoAccessN NOAccess">
+                            <div class="cell">• Access ETA?: </div>
+                            <div class="cell" align="left"><input type="checkbox" id="UNAccess" onChange="myUpdate();UnkNow(this.id,'UQ1bi');" />Unknown
+                                <br>
+                                <input type="datetime-local" id="UQ1bi" value="1969-01-01T00:00" onChange="TimeUp('future',UQ1bi.value,'UQ1bi');myUpdate();" /> (MT)</div>
+                        </div>			
+                        <div class="row displayNone Fiorm ACCESS USUB">
+                            <div class="cell">• ETA?: </div>
+                            <div class="cell" align="left"><input type="checkbox" id="UNETA" onChange="myUpdate();UnkNow(this.id,'UQ1c');" />Unknown
+                                <br>
+                                <input type="datetime-local" id="UQ1c" value="1969-01-01T00:00" onChange="TimeUp('future',UQ1c.value,'UQ1c');myUpdate();" /> (MT)
+                                <BR>
+                            <div class= "NoEBMode Fiorm ACCESS USUB">
+                                • CBT? <input type="checkbox" id="CBTB4" onChange="CBTBefore();myUpdate();" />
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row displayNone YesEBMode">
+                            <div class="cell3">Are we updating Hourly???</div>
+                            <div class="cell3"><input type="checkbox" id="hourly" onchange="myUpdate();"> </div>
+                        </div>
+                        <div class="row displayNone YesEBMode">
+                            <div class="cell">Start time in Remedy</div>
+                            <div class="cell2"><input type="datetime-local" id="startTime" value="1969-01-01T00:00" onchange="timediff();"> </div>
+                        </div>
+                        <div class="row displayNone YesEBMode">
+                            <div class="cell"></div>
+                            <div class="cell"><textarea id="TimeDifferance" rows="1" cols="15" style="overflow: hidden; width: 300px;background-color: #dddddd;" readonly></textarea></div>
+                        </div>
+                
+                
+                        <div class="row displayNone Fiorm VMUPDATE NAFTER ONSITE NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
+                            <div class="cell" style="text-align: right;">Plant Type: </div>
+                            <div class="cell">
+                                    <select id="UQ2" onChange="myUpdate();PlantType();" >
+                                        <option label=" "></option>
+                                        <option value="aerial ">Aerial</option>
+                                        <option value="underground ">Underground</option>
+                                        <option value="both aerial and underground ">Both Aerial and Underground</option>	
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm VMUPDATE SUBTYPE USUB NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
+                            <div class="cell" style="text-align: right;">• Sub-Type: </div>
+                            <div class="cell">
+                                    <select id="UQ2a" onChange="myUpdate();" >
+                                        <option label=" "></option>
+                                        <option value=" at a street crossing.">Street Crossing</option>
+                                        <option value=" near a right of way/parallel.">Right of Way/Parallel</option>
+                                        <option value=" in a rear easement.">Rear Easement</option>
+                                        <option value=" in a front easement.">Front Easement</option>
+                                        <option value=".">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm VMUPDATE NAFTER ONSITE NCOMMPOWER ptype PSUpdate PSGEN CPOTy">
+                            <div class="cell" style="text-align: right;">Outage Type: </div>
+                            <div class="cell">
+                                    <select id="UQ3" onChange="myUpdate();" >
+                                        <option label=" "></option>
+                                        <option value="coaxial lines">Coax</option>
+                                        <option value="fiber lines ">Fiber</option>
+                                        <option value="coaxial and fiber lines">Coax and Fiber</option>
+                                        <option value="transport ">Transport</option>
+                                        <option value="third party fiber">3rd Party Fiber</option>
+                                        <option value="third party transport">3rd Party Transport</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
+                            <div class="cell">&nbsp;</div>
+                            <div class="cell">Dual Dispatch Engaged: <input type="checkbox" id="DualCheck" onChange="DualTwo();myUpdate();" /><BR>
+                            
+                            
+                            
+                            <p class="LBI2 displayNone">• LBI Impacted?: <input type="checkbox" id="ElBeeEye" onChange="DualTwo();myUpdate();"></p>
+                            <p class="Howm displayNone">• How Many?: <input type="number" id="HowMany2" onChange="HowMany(this.id);myUpdate();" /></p>
+                
+                            </div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
+                            <div class="cell" style="vertical-align: top;"><BR>Technician Update: </div>
+                        </div>
+                
+                                
+                
+                
+                        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
+                            <div class="cell" style="vertical-align: top;text-align: right;">What did the tech do?: </div>
+                            <div class="cell" style="vertical-align: top;">
+                            <I><font color=white>"They have <input type="text" style="width: 215px;" id="UA1" onChange="myUpdate();" /></I></font>
+                            </div>
+                        </div>				
+                
+                        <div class="row displayNone Fiorm AFTER NCOMMPOWER PSGEN CPOTy">
+                            <div class="cell" style="vertical-align: top; text-align: right;">Where was the work done?: </div>
+                            <div class="cell" style="vertical-align: top;">
+                            <I><font color=white>at <input type="text" style="width: 283px;" id="UA2" onChange="myUpdate();" /></I></font></div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm AFTER NFINAL NEXTSTEPS PSGEN GENTI CPOTy">
+                            <div class="cell" style="vertical-align: top; text-align: right;">Tech's next steps?: </div>
+                            <div class="cell" style="vertical-align: top;"><I><font color=white>and will continue to<BR><input type="text" style="width: 285px;" id="UA3" onChange="myUpdate();" />."</I></font></div>
+                        </div>
+                
+                        <div class="row displayNone Fiorm FINAL F2 F22 PSGEN">
+                            <div class="cell" style="vertical-align: top;"></div>
+                            <div class="cell" style="vertical-align: top;"><I><font color=white>which has resolved the outage."</I></font></div>
+                        </div>
+                    </section>
+
+        <!--Commercial Power Outage-->
+                <div class="row displayNone Fiorm PSQMTAopt1 PSH PSo">
+                    <div class="cell" style="text-align: right;">Technician Name: </div>
+                    <div class="cell" align="left"><input type="text" id="PTechN" onChange="CPUExec(PSQMTA1.value);" /> <input type="checkbox" id="PS1-VM" onChange="PSVM();CPUExec(PSQMTA1.value);" /> Voicemail? </div>
+                </div>
+        
+                <div class="row displayNone Fiorm PSQMTA PSH">
+                    <div class="cell" style="text-align: right;">Power Issue Type: </div>
+                    <div class="cell">
+                            <select id="PSQMTA1" onChange="myUpdate();Power();" >
+                                <option label=" "></option>
+                                <option value="CPO">Commercial Power Outage</option>
+                                <option value="GEN">Generator Tracking</option>
+                                <option value="PS">Power Supply in Stand-By</option>
+                                <option value="QMTAUPDATE">QMTA</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="row displayNone Fiorm CPO PSH">
+                    <div class="cell" style="text-align: right;">Commercial Power Outage: </div>
+                    <div class="cell">
+                            <select id="CPO1" onChange="myUpdate();CPU1();" >
+                                <option label=" "></option>
+                                <option value="No Change">No Change</option>
+                                <option value="More Devices">Change: More Devices Offline</option>
+                                <option value="Partial">Change: Partial Recovery</option>
+                                <option value="6HourOut">6-Hour Send Re-Verification</option>
+                                <option value="IRIS">IRIS Event During CPO</option>
+                                <option value="Reverified">CPO Re-Verified</option>
+                                <option value="Restored">Power Restored</option>
+                                <option value="Power Restored but Monitoring">Power Restored but Monitoring</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="row displayNone Fiorm GEN PSH">
+                    <div class="cell" style="text-align: right;">Generator Ticket: </div>
+                    <div class="cell">
+                            <select id="GEN1" onChange="myUpdate();CPU2();" >
+                                <option label=" "></option>
+                                <option value="No Change">No Change</option>
+                                <option value="Refuel">Refuel Dispatch</option>
+                                <option value="Refuel Complete">Refuel Complete</option>
+                                <option value="Pickup">Generator Pickup</option>
+                                <option value="PickupComplete">Generator Pickup Completed</option>
+                        </select>
+                    </div>
+                </div>				
+        
+                <div class="row displayNone Fiorm PS PSH">
+                    <div class="cell" style="text-align: right;">PS in Stand-By: </div>
+                    <div class="cell">
+                            <select id="PS1" onChange="myUpdate();CPU3();" >
+                                <option label=" "></option>
+                                <option value="Standby">At Least 1 Hour Remains</option>
+                                <option value="Less">Less than 1 Hour Remains</option>
+                                <option value="Offline">Power Supply has Fallen Offline</option>
+                                <option value="OnOut">PS Online, Outage Remains</option>
+                                <option value="OnRest">PS Online, Restored</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="row displayNone Fiorm QMTAUPDATE PSH">
+                    <div class="cell" style="text-align: right;">QMTA: </div>
+                    <div class="cell">
+                            <select id="QMTA1" onChange="myUpdate();CPU4();" >
+                                <option label=" "></option>
+                                <option value="Valid">QMTA Still Valid</option>
+                                <option value="Failed">QMTA Offline</option>
+                                <option value="Outage">QMTA Online, Outage Remains</option>
+                                <option value="Online">QMTA Online, Outage Restored</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="row displayNone Fiorm PSQMTAopt5 PSH PSo">
+                    <div class="cell"></div>
+                    <div class="cell" align="left"><input type="checkbox" id="NoGen" onChange="CPUExec(PSQMTA1.value);" /> No Generator Available</div>					
+                </div>
+        
+                <div class="row displayNone Fiorm PSQMTAopt2 PSH PSo">
+                    <div class="cell" style="text-align: right;">ZX-Plant Other LH: <BR><font size=1><I>(YD-Storm Assessment for Storm)</I></font></div>
+                    <div class="cell2" align="left"><input maxlength="20" type="number" id="ZX" onChange="HowMany(this.id);CPUExec(PSQMTA1.value);" /> </div>
+                </div>
+                <div class="row displayNone Fiorm COMMPOWER CPOR NLP">
+                    <div class="cell" style="text-align: right;">Source of Restoration Time: </div>
+                    <div class="cell">
+                            <select id="CPOT" onChange="myUpdate();CPU1();CommPwr();CPOType();" >
+                                <option label=" "></option>
+                                <option value="6 Hour Re-Verification due at ">6 Hour Re-Verification</option>
+                                <option value="Power company website ETR is ">Power Company Website</option>
+                                <option value="The ETR is provided by the technician is at ">Provided By Technician</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row displayNone Fiorm PSQMTAopt3 PSH PSo NOSHOW">
+                    <div class="cell displayNone PSM" style="text-align: right;">ETR?</div>
+                    <div class="cell displayNone CPOR" style="text-align: right;">CPO 6-hr Reverify Time or ETR?: <BR><font size=1><I>(6-Hours after last verification)</I></font> </div>
+                    <div class="cell NCPOR" style="text-align: right;">Tech ETA?: </div>
+                    <div class="cell" align="left"><input type="checkbox" id="CPUETAa" onChange="myUpdate();CPUExec(PSQMTA1.value);UnkNow(this.id,'CPUETA')" />Unknown
+                    <BR>
+                    <input class="cell2" type="datetime-local" id="CPUETA" value="1969-01-01T00:00" onChange="TimeUp('future',CPUETA.value,'CPUETA');CPUExec(PSQMTA1.value);" /> (MT)</div>
+                </div>
+        
+        
+        
+        
+        
+        
+        
+                <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NLP">
+                    <div class="cell" style="text-align: right;">• Power Co. Name: </div>
+                    <div class="cell" align="left"><input type="text" id="UQ4a" onChange="myUpdate();"></div>
+                </div>
+        
+                <div class="row displayNone Fiorm COMMPOWER USUB NLP">
+                    <div class="cell" style="text-align: right;">• Power Co. On Site?: </div>
+                    <div class="cell">
+                            <select id="UQ4b" onChange="myUpdate();" >
+                                <option label=" "></option>
+                                <option value="on">Yes</option>
+                                <option value="not on">No</option>
+                        </select>
+                    </div>
+                </div>	
+        
+                <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB    NFIN AL NPSF">
+                    <div class="cell NLP" style="text-align: right;">• ETR: </div>
+                    <div class="cell LP displayNone" style="text-align: right;">• Location Power ETR: </div>
+                    <div class="cell" align="left"><input type="checkbox" id="UQ4ci" onChange="myUpdate();UnkNow(this.id,'UQ4c');" />Unknown
+                    <BR>
+                    <input class="cell2" type="datetime-local" id="UQ4c" value="1969-01-01T00:00" onChange="TimeUp('future',UQ4c.value,'UQ4c');myUpdate();" /> (MT)</div>
+                </div>
+                <div class="row displayNone Fiorm PSF">
+                    <div class="cell" style="text-align: right;">• What is the Fault?: </div>
+                    <div class="cell">
+                            <select id="PSFR" onChange="myUpdate();" >
+                                <option label=" "></option>
+                                <option value="breaker tripped">Breaker Tripped</option>
+                                <option value="batteries failed">Batteries Failed</option>
+                                <option value="had inverter faulure">Inverter Issues</option>
+                        </select>
+                    </div>
+                </div>	
+        
+        
+                <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NoPSF">
+                    <div class="cell" style="vertical-align: top; text-align: right;">• Verification Address: </div>
+                    <div class="cell" align="left"><input type="text" width=400 id="UQ4d" onChange="myUpdate();"></div>
+                </div>
+        
+                <div class="row displayNone Fiorm VMUPDATE COMMPOWER USUB NLP PSF">
+                    <div class="cell" align="right" style="vertical-align: top; text-align: right;">Generator Deployed or on Truck Inverter?: </div>
+                    <div class="cell" align="left">
+                        <select id="UQ4e" onChange="myUpdate();GenDep();OnSite();PSFault();" >
+                            <option value="NA">No</option>
+                            <option value="Yes">Yes Generator</option>
+                            <option value="YesTI">Yes Truck Inverter</option>
+                            <option value="No">No Generator Available</option>
+                    </select>
+                    </div>
+                </div>
+        
+        
+        
+                <div class="row displayNone QMTAAddressMac">
+                    <div class="cell"><input id="btnAdd" type="button" value="Add QMTA Address and MAC" /></div>
+                    <div class="row">
+                        <div class="cell" id="AddBox" onchange="QMTAAddressandMAC()"></div>
+                        <div class="cell" id="MACBox" onchange="QMTAAddressandMAC()">
+                        <!--Textboxes will be added here 
+                    <div class="cell"><input id="btnGet" type="button" value="Compile" /></div>-->
+                    </div>
+                    </div>
+                </div>
+        
+        
+                <div class="row displayNone Fiorm P SH P So GENInfo">
+                    <div class="cell" style="text-align: right;">Generator Serial Num: </div>
+                    <div class="cell" align="left"><input type="text" id="GENSerial" onChange="myUpdate(); GenInfoTemplate();" /></div>
+                </div>	
+        
+                <div class="row displayNone Fiorm PSQMTAopt4 P SH P So">
+                    <div class="cell" style="text-align: right;">Generator Refuel Time?: </div>
+                    <div class="cell2" align="left"><input type="datetime-local" id="GENRefuel" value="1969-01-01T00:00" onChange="TimeUp('future',GENRefuel.value,'GENRefuel');CPUExec(PSQMTA1.value);myUpdate();GenInfoTemplate();" /> (MT)</div>
+                </div>	
+        
+                <div class="row displayNone Fiorm P SH P So GENInfo NOAccess">
+                    <div class="cell" style="text-align: right;">POC: </div>
+                    <div class="cell" align="left"><input type="text" id="GENPOC" onChange="myUpdate();GenInfoTemplate();" /></div>
+                </div>	
+        
+                <div class="row displayNone Fiorm P SH P So GENInfo">
+                    <div class="cell" style="text-align: right;">Generator Currently Powering: </div>
+                    <div class="cell" align="left"><input type="text" id="GENNodes" onChange="myUpdate(); GenInfoTemplate();" /></div>
+                </div>
+        
+                <div class="row displayNone Fiorm PSQMTAopt6 P SH P So GENInfo">
+                    <div class="cell GeN PSo" style="text-align: right;">Generator Location?: </div>
+                    <div class="cell ReV PSo displayNone" style="text-align: right;">Verification Address?: </div>
+                    <div class="cell" align="left"><input type="text" id="GENAddy" onChange="CPUExec(PSQMTA1.value);myUpdate(); GenInfoTemplate();" /></div>
+                </div>
+                <div class="row displayNone Fiorm PSQMTAopt6 P SH P So GENInfo">
+                    <div class="cell GeN PSo" style="text-align: right;">POC: </div>
+                    <div class="cell" align="left"><input type="text" id="POCR" onChange="CPU2();myUpdate(); GenInfoTemplate();" /></div>
+                </div>
+                <div class="row displayNone Fiorm P SH P So GENInfo PSGEN">
+                    <div class="cell" style="text-align: right;">Related INC: </div>
+                    <div class="cell" align="left"><input type="text" id="GENINC" onChange="myUpdate(); GenInfoTemplate();" /></div>
+                </div>
+        
+                <div class="row displayNone Fiorm AFTER ETRETR ONSITE NFINAL RES GENTI">
+                    <div class="cell" style="vertical-align: top; text-align: right;">ETR?: </div>
+                    <div class="cell" align="left">
+                    <input type="checkbox" id="UQ5a" onClick="UnkNow(this.id,'UQ5');" onChange="myUpdate();" />Unknown
+                    <BR>
+                    <input class="cell2" type="datetime-local" id="UQ5" value="1969-01-01T00:00" onChange="myUpdate();" /> (MT)</div>
+                    
+                </div>				
+        
+        
+                <div class="row displayNone Fiorm AFTER">
+                    <div class="cell" style="vertical-align: top;"></div>
+                    <div class="cell" style="vertical-align: top;"><input type="checkbox" id="UA0" onChange="Final();myUpdate();Final();" />Outage Resolved</div>
+                </div>
+        
+                <div class="row displayNone Fiorm mon">
+                    <div class="cell" style="vertical-align: top;"></div>
+                    <div class="cell" style="vertical-align: top;"><input type="checkbox" id="MonRes" onChange="myUpdate();" />Outage Resolved</div>
+                </div>
+        
+        
+                <div class="row displayNone Fiorm FINAL">
+                    <div class="cell" style="vertical-align: top; text-align: right;">Resolution Time: </div>
+                    <div class="cell2" style="vertical-align: top;"><input type="datetime-local" id="UA4" value="1969-01-01T00:00" onChange="TimeUp('past',UA4.value,'UA4');myUpdate();" /> (MT)</div>
+                </div>
+        
+                <div class="row displayNone Fiorm FINAL F2 F22">
+                    <div class="cell" style="vertical-align: top;text-align: right;">Fix Type:</div>
+                    <div class="cell" style="vertical-align: top;">
+                    Permanent <input value="Permanent" type="radio" name="Fixx" id="UA5" onChange="myUpdate();" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTemporary <input value="Temporary" type="radio" name="Fixx" id="UA6" onChange="myUpdate();" />
+                    </div>
+                </div>
+                <div class="row displayNone Fiorm PSLessThan">
+                    <div class="cell" style="text-align: right;">Less than 60 min remaining?:</div>
+                    <div class="cell displayNone PSLessThan"><input type="checkbox" id="PSCheckbox" onChange="myUpdate(); CPOETR();" /></div>
+                </div>
+                <div class="row displayNone Fi orm GAStandby">
+                    <div class="row"></div>
+                    <div class="cell" style="text-align: left;" >If the PS is in Standby does it have less than 64-72 hours remaining and is a GA node? <input type="checkbox" id="PSLessThanStandby" onChange="myUpdate();InitUpdate();" /></div>
+                </div>
+                <div class="row displayNone Fiorm INIT">
+                    <div class="cell" style="text-align: right;">QMTA?: <input type="checkbox" id="IQ5" onChange="myUpdate();CPOETR();" /></div>
+                    <div class="cell displayNone QMTA" ></div>
+                </div>
+        
+                <div class="row displayNone Fiorm MULTIQMTA">
+                    <div class="cell"></div>
+                    <div class="cell" >QMTAs for All Nodes? <input type="checkbox" id="IQ5b" onChange="myUpdate();CPOETR();" /></div>
+                </div>
+        
+        
+        
+                <div class="row displayNone Fiorm CBT1">
+                    <div class="cell" style="text-align: right;">CBT?: <input type="checkbox" id="IQ6" onChange="myUpdate();CBT();" /></div>
+                    <div class="cell displayNone CBT2" style="text-align: left;" >CBT? <input type="radio" name="CeeBeeTee" id="IQ6a" value="Single CBT" onChange="myUpdate();CBT();" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRepeat CBT?: <input type="radio" name="CeeBeeTee" id="IQ6b" value="Repeat CBT" onChange="myUpdate();CBT();" /></div>
+                </div>
+                <div class="row displayNone Fiorm NoNote">
+                    <div class="cell"></div>
+                    <div class="cell" style="text-align: center; color: red;">No Notification Required</div>
+                </div>
+                <div class="row displayNone Fi orm GA">
+                    <div class="cell" style="text-align: right;">Is outage in California?:<input type="checkbox" id="Cali" onChange="myUpdate();Califunction();" /></div>
+                </div>
+                <div class="row displayNone Fi orm GAC">
+                    <div class="cell" style="text-align: right;">Critical Facilities?:<input type="checkbox" id="GAA" onChange="myUpdate();GA();" /><BR><font size=1><i>Government Affairs (GA)</i></font> </div>
+                    <div class="cell displayNone GA2" style="text-align: left;" >How many power supplies are not online?<br> <input type="number" id="TotalPS" onChange="HowMany(this.id);myUpdate();" /></div>
+                </div>
+                <div class="row displayNone Fi orm GA2">
+                    <div class="row displayNine GA2"></div>
+                    <div class="cell displayNone GA2" style="text-align: left;" >How many are GA critical power supplies? <input type="number" id="GANum" onChange="HowMany(this.id);myUpdate();" /></div>
+                </div>
+                <div class="row displayNone Fi orm BOTOTBoxSH">
+                    <!-- <div class="row displayNone BOTOTBoxSH"></div> -->
+                    <div class="cell displayNone BOTOTBoxSH" style="text-align: right;" >Is this a BOTOT? <input type="checkbox" id="BOTOTBox" onChange="HowMany(this.id);myUpdate();" /></div>
+                </div>
+                <div class="row displayNone IRIS">
+                    <div class="cell">Is there a SSA alarm is this node </div>
+                    <div class="cell"><select id="AN" onChange="IRIS();store_value('AN',this.value);">
+                        <option value=" "></option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="row displayNone USDS">
+                    <div class="cell">Is there an upstream or downstream alarm present is this node </div>
+                    <div class="cell"><select id="USDSA" onChange="IRIS();store_value('USDSA',this.value);">
+                        <option value=" "></option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Node</div>
+                    <div class="cell"><input type="text" id="Q1" onChange="IRIS();store_value('Q1',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #1 Account #</div>
+                    <div class="cell"><input type="text" id="Q2" onChange="IRIS();store_value('Q2',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #1 Address </div>
+                    <div class="cell"><input type="text" id="Q3" onChange="IRIS();store_value('Q3',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #1 Biller Notes</div>
+                    <div class="cell"><input type="text" id="Q4" onChange="IRIS();store_value('Q4',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Upstream and Downstream Issues</div>
+                    <div class="cell"><input type="text" id="Q11a" onChange="IRIS();store_value('Q4',this.value);" /></div>
+                </div>
+                <hr class="displayNone Dispatch">
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #2 Account #</div>
+                    <div class="cell"><input type="text" id="Q5" onChange="IRIS();store_value('Q5',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #2 Address </div>
+                    <div class="cell"><input type="text" id="Q6" onChange="IRIS();store_value('Q6',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #2 Biller Notes</div>
+                    <div class="cell"><input type="text" id="Q7" onChange="IRIS();store_value('Q7',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Upstream and Downstream Issues</div>
+                    <div class="cell"><input type="text" id="Q11b" onChange="IRIS();store_value('Q4',this.value);" /></div>
+                </div>
+                <hr class="displayNone Dispatch">
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #3 Account #</div>
+                    <div class="cell"><input type="text" id="Q8" onChange="IRIS();store_value('Q8',this.value);" /></div>
+                </div>
+                    <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #3 Address </div>
+                    <div class="cell"><input type="text" id="Q9" onChange="IRIS();store_value('Q9',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Customer #3 Biller Notes </div>
+                    <div class="cell"><input type="text" id="Q10" onChange="IRIS();store_value('Q10',this.value);" /></div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Upstream and Downstream Issues</div>
+                    <div class="cell"><input type="text" id="Q11c" onChange="IRIS();store_value('Q4',this.value);" /></div>
+                </div>
+        
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Are there commonalities between the three addresses</div>
+                    <div class="cell"><select id="common" onChange="IRIS();store_value('common',this.value);">
+                        <option value=" "></option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="row displayNone Dispatch">
+                    <div class="cell">Why are we CBTing this?</div>
+                    <div class="cell"><input type="text" id="CBTReason" onChange="IRIS();store_value('CBTReason',this.value);" /></div>
+                </div>
+        
+                </div>
+        
+                <div class="row SPACE HOLDER">
+                    <div class="cell">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+                    <div class="cell" style="text-align: center;"><BR><BR><BR></div>
+                </div>				
+        
+        
+        
+                <div class="row">
+                    <div class="cell">&nbsp;</div>
+                    <div class="cell" style="text-align: center;"><input type="button" value="Clear" onclick="window.location.reload();" /></div>
+                </div>
+        
+                <div class="row displayNone">
+                    <div class="cell">&nbsp;</div>
+                    <div class="cell" style="text-align: center;"><input type="button" value="TEST" onclick="UpdateCases();" /></div>
+                </div>				
+        
+                <div class="row displayNone">
+                    <div class="cell">&nbsp;</div>
+                    <div class="cell">
+                    Nodes: <input type="text" id="FlagNodes" />
+                    <BR>
+                    Multi-Node: <input type="checkbox" id="FlagMulti" /> 
+                    <BR>
+                    PS Status: <input type="text" id="FlagPSStatus" placeholder="Online/Offline/Standby/Combo" />
+                    <BR>
+                    PS Offline: <input type="text" id="FlagPSOffline" placeholder="Node: X, PS Y; Node: Z, PS A;..." />
+                    <BR>
+                    PS Standby: <input type="text" id="FlagPSStandby" placeholder="Node: X, PS Y 1 hour remaining; Node: Z, PS A 1 hour remaining;..."/>
+                    </div>
+                </div>
+        
+                <div class="row displayNone">
+                <div class="cell">&nbsp;</div>
+                <textarea id="PWOTotal" rows="10" cols="49" style="overflow: auto; width: 500px;font-size: 10px;"></textarea>
+                </div>
+                <div class="row displayNone">
+                <div class="cell">&nbsp;</div>
+                <textarea id="PWOTotalY6" rows="10" cols="49" style="overflow: auto; width: 500px;font-size: 10px;"></textarea>
+                </div>
+                <div class="row displayNone Reppy6a">
+                <div class="cell">&nbsp;</div>
+                <textarea id="PWOTotalY6Format" rows="10" cols="49" style="background-color: #787878; color: white; border: 0px;overflow: auto; height: 500 px; width: 500px; font-size: 10px;"></textarea>
+                </div>
+                <div class="row displayNone RepZVa">
+                <div class="cell">&nbsp;</div>
+                <textarea id="PWOTotalFormat" rows="10" cols="49" style="background-color: #787878; color: white; border: 0px; overflow: auto; height: 500 px; width: 500px; font-size: 10px;"></textarea>
+                </div>
+                </div>
+                <div class="column"></div>
             </div>
-            </div>
-        </div>
-
-
-        <div class="row displayNone Fiorm P SH P So GENInfo">
-            <div class="cell" style="text-align: right;">Generator Serial Num: </div>
-            <div class="cell" align="left"><input type="text" id="GENSerial" onChange="myUpdate(); GenInfoTemplate();" /></div>
-        </div>	
-
-        <div class="row displayNone Fiorm PSQMTAopt4 P SH P So">
-            <div class="cell" style="text-align: right;">Generator Refuel Time?: </div>
-            <div class="cell2" align="left"><input type="datetime-local" id="GENRefuel" value="1969-01-01T00:00" onChange="TimeUp('future',GENRefuel.value,'GENRefuel');CPUExec(PSQMTA1.value);myUpdate();GenInfoTemplate();" /> (MT)</div>
-        </div>	
-
-        <div class="row displayNone Fiorm P SH P So GENInfo NOAccess">
-            <div class="cell" style="text-align: right;">POC: </div>
-            <div class="cell" align="left"><input type="text" id="GENPOC" onChange="myUpdate();GenInfoTemplate();" /></div>
-        </div>	
-
-        <div class="row displayNone Fiorm P SH P So GENInfo">
-            <div class="cell" style="text-align: right;">Generator Currently Powering: </div>
-            <div class="cell" align="left"><input type="text" id="GENNodes" onChange="myUpdate(); GenInfoTemplate();" /></div>
-        </div>
-
-        <div class="row displayNone Fiorm PSQMTAopt6 P SH P So GENInfo">
-            <div class="cell GeN PSo" style="text-align: right;">Generator Location?: </div>
-            <div class="cell ReV PSo displayNone" style="text-align: right;">Verification Address?: </div>
-            <div class="cell" align="left"><input type="text" id="GENAddy" onChange="CPUExec(PSQMTA1.value);myUpdate(); GenInfoTemplate();" /></div>
-        </div>
-        <div class="row displayNone Fiorm PSQMTAopt6 P SH P So GENInfo">
-            <div class="cell GeN PSo" style="text-align: right;">POC: </div>
-            <div class="cell" align="left"><input type="text" id="POCR" onChange="CPU2();myUpdate(); GenInfoTemplate();" /></div>
-        </div>
-        <div class="row displayNone Fiorm P SH P So GENInfo PSGEN">
-            <div class="cell" style="text-align: right;">Related INC: </div>
-            <div class="cell" align="left"><input type="text" id="GENINC" onChange="myUpdate(); GenInfoTemplate();" /></div>
-        </div>
-
-        <div class="row displayNone Fiorm AFTER ETRETR ONSITE NFINAL RES GENTI">
-            <div class="cell" style="vertical-align: top; text-align: right;">ETR?: </div>
-            <div class="cell" align="left">
-            <input type="checkbox" id="UQ5a" onClick="UnkNow(this.id,'UQ5');" onChange="myUpdate();" />Unknown
-            <BR>
-            <input class="cell2" type="datetime-local" id="UQ5" value="1969-01-01T00:00" onChange="myUpdate();" /> (MT)</div>
-            
-        </div>				
-
-
-        <div class="row displayNone Fiorm AFTER">
-            <div class="cell" style="vertical-align: top;"></div>
-            <div class="cell" style="vertical-align: top;"><input type="checkbox" id="UA0" onChange="Final();myUpdate();Final();" />Outage Resolved</div>
-        </div>
-
-        <div class="row displayNone Fiorm mon">
-            <div class="cell" style="vertical-align: top;"></div>
-            <div class="cell" style="vertical-align: top;"><input type="checkbox" id="MonRes" onChange="myUpdate();" />Outage Resolved</div>
-        </div>
-
-
-        <div class="row displayNone Fiorm FINAL">
-            <div class="cell" style="vertical-align: top; text-align: right;">Resolution Time: </div>
-            <div class="cell2" style="vertical-align: top;"><input type="datetime-local" id="UA4" value="1969-01-01T00:00" onChange="TimeUp('past',UA4.value,'UA4');myUpdate();" /> (MT)</div>
-        </div>
-
-        <div class="row displayNone Fiorm FINAL F2 F22">
-            <div class="cell" style="vertical-align: top;text-align: right;">Fix Type:</div>
-            <div class="cell" style="vertical-align: top;">
-            Permanent <input value="Permanent" type="radio" name="Fixx" id="UA5" onChange="myUpdate();" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTemporary <input value="Temporary" type="radio" name="Fixx" id="UA6" onChange="myUpdate();" />
-            </div>
-        </div>
-        <div class="row displayNone Fiorm PSLessThan">
-            <div class="cell" style="text-align: right;">Less than 60 min remaining?:</div>
-            <div class="cell displayNone PSLessThan"><input type="checkbox" id="PSCheckbox" onChange="myUpdate(); CPOETR();" /></div>
-        </div>
-        <div class="row displayNone Fi orm GAStandby">
-            <div class="row"></div>
-            <div class="cell" style="text-align: left;" >If the PS is in Standby does it have less than 64-72 hours remaining and is a GA node? <input type="checkbox" id="PSLessThanStandby" onChange="myUpdate();InitUpdate();" /></div>
-        </div>
-        <div class="row displayNone Fiorm INIT">
-            <div class="cell" style="text-align: right;">QMTA?: <input type="checkbox" id="IQ5" onChange="myUpdate();CPOETR();" /></div>
-            <div class="cell displayNone QMTA" ></div>
-        </div>
-
-        <div class="row displayNone Fiorm MULTIQMTA">
-            <div class="cell"></div>
-            <div class="cell" >QMTAs for All Nodes? <input type="checkbox" id="IQ5b" onChange="myUpdate();CPOETR();" /></div>
-        </div>
 
 
 
-        <div class="row displayNone Fiorm CBT1">
-            <div class="cell" style="text-align: right;">CBT?: <input type="checkbox" id="IQ6" onChange="myUpdate();CBT();" /></div>
-            <div class="cell displayNone CBT2" style="text-align: left;" >CBT? <input type="radio" name="CeeBeeTee" id="IQ6a" value="Single CBT" onChange="myUpdate();CBT();" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRepeat CBT?: <input type="radio" name="CeeBeeTee" id="IQ6b" value="Repeat CBT" onChange="myUpdate();CBT();" /></div>
-        </div>
-        <div class="row displayNone Fiorm NoNote">
-            <div class="cell"></div>
-            <div class="cell" style="text-align: center; color: red;">No Notification Required</div>
-        </div>
-        <div class="row displayNone Fi orm GA">
-            <div class="cell" style="text-align: right;">Is outage in California?:<input type="checkbox" id="Cali" onChange="myUpdate();Califunction();" /></div>
-        </div>
-        <div class="row displayNone Fi orm GAC">
-            <div class="cell" style="text-align: right;">Critical Facilities?:<input type="checkbox" id="GAA" onChange="myUpdate();GA();" /><BR><font size=1><i>Government Affairs (GA)</i></font> </div>
-            <div class="cell displayNone GA2" style="text-align: left;" >How many power supplies are not online?<br> <input type="number" id="TotalPS" onChange="HowMany(this.id);myUpdate();" /></div>
-        </div>
-        <div class="row displayNone Fi orm GA2">
-            <div class="row displayNine GA2"></div>
-            <div class="cell displayNone GA2" style="text-align: left;" >How many are GA critical power supplies? <input type="number" id="GANum" onChange="HowMany(this.id);myUpdate();" /></div>
-        </div>
-        <div class="row displayNone Fi orm BOTOTBoxSH">
-            <!-- <div class="row displayNone BOTOTBoxSH"></div> -->
-            <div class="cell displayNone BOTOTBoxSH" style="text-align: right;" >Is this a BOTOT? <input type="checkbox" id="BOTOTBox" onChange="HowMany(this.id);myUpdate();" /></div>
-        </div>
-        <div class="row displayNone IRIS">
-            <div class="cell">Is there a SSA alarm is this node </div>
-            <div class="cell"><select id="AN" onChange="IRIS();store_value('AN',this.value);">
-                <option value=" "></option>
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-            </div>
-        </div>
-        <div class="row displayNone USDS">
-            <div class="cell">Is there an upstream or downstream alarm present is this node </div>
-            <div class="cell"><select id="USDSA" onChange="IRIS();store_value('USDSA',this.value);">
-                <option value=" "></option>
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-            </div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Node</div>
-            <div class="cell"><input type="text" id="Q1" onChange="IRIS();store_value('Q1',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #1 Account #</div>
-            <div class="cell"><input type="text" id="Q2" onChange="IRIS();store_value('Q2',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #1 Address </div>
-            <div class="cell"><input type="text" id="Q3" onChange="IRIS();store_value('Q3',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #1 Biller Notes</div>
-            <div class="cell"><input type="text" id="Q4" onChange="IRIS();store_value('Q4',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Upstream and Downstream Issues</div>
-            <div class="cell"><input type="text" id="Q11a" onChange="IRIS();store_value('Q4',this.value);" /></div>
-        </div>
-        <hr class="displayNone Dispatch">
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #2 Account #</div>
-            <div class="cell"><input type="text" id="Q5" onChange="IRIS();store_value('Q5',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #2 Address </div>
-            <div class="cell"><input type="text" id="Q6" onChange="IRIS();store_value('Q6',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #2 Biller Notes</div>
-            <div class="cell"><input type="text" id="Q7" onChange="IRIS();store_value('Q7',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Upstream and Downstream Issues</div>
-            <div class="cell"><input type="text" id="Q11b" onChange="IRIS();store_value('Q4',this.value);" /></div>
-        </div>
-        <hr class="displayNone Dispatch">
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #3 Account #</div>
-            <div class="cell"><input type="text" id="Q8" onChange="IRIS();store_value('Q8',this.value);" /></div>
-        </div>
-            <div class="row displayNone Dispatch">
-            <div class="cell">Customer #3 Address </div>
-            <div class="cell"><input type="text" id="Q9" onChange="IRIS();store_value('Q9',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Customer #3 Biller Notes </div>
-            <div class="cell"><input type="text" id="Q10" onChange="IRIS();store_value('Q10',this.value);" /></div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Upstream and Downstream Issues</div>
-            <div class="cell"><input type="text" id="Q11c" onChange="IRIS();store_value('Q4',this.value);" /></div>
-        </div>
-
-        <div class="row displayNone Dispatch">
-            <div class="cell">Are there commonalities between the three addresses</div>
-            <div class="cell"><select id="common" onChange="IRIS();store_value('common',this.value);">
-                <option value=" "></option>
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-            </div>
-        </div>
-        <div class="row displayNone Dispatch">
-            <div class="cell">Why are we CBTing this?</div>
-            <div class="cell"><input type="text" id="CBTReason" onChange="IRIS();store_value('CBTReason',this.value);" /></div>
-        </div>
-
-        </div>
-
-        <div class="row SPACE HOLDER">
-            <div class="cell">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
-            <div class="cell" style="text-align: center;"><BR><BR><BR></div>
-        </div>				
-
-
-
-        <div class="row">
-            <div class="cell">&nbsp;</div>
-            <div class="cell" style="text-align: center;"><input type="button" value="Clear" onclick="window.location.reload();" /></div>
-        </div>
-
-        <div class="row displayNone">
-            <div class="cell">&nbsp;</div>
-            <div class="cell" style="text-align: center;"><input type="button" value="TEST" onclick="UpdateCases();" /></div>
-        </div>				
-
-        <div class="row displayNone">
-            <div class="cell">&nbsp;</div>
-            <div class="cell">
-            Nodes: <input type="text" id="FlagNodes" />
-            <BR>
-            Multi-Node: <input type="checkbox" id="FlagMulti" /> 
-            <BR>
-            PS Status: <input type="text" id="FlagPSStatus" placeholder="Online/Offline/Standby/Combo" />
-            <BR>
-            PS Offline: <input type="text" id="FlagPSOffline" placeholder="Node: X, PS Y; Node: Z, PS A;..." />
-            <BR>
-            PS Standby: <input type="text" id="FlagPSStandby" placeholder="Node: X, PS Y 1 hour remaining; Node: Z, PS A 1 hour remaining;..."/>
-            </div>
-        </div>
-
-
-        </form>
-
-        <div class="row displayNone">
-        <div class="cell">&nbsp;</div>
-        <textarea id="PWOTotal" rows="10" cols="49" style="overflow: auto; width: 500px;font-size: 10px;"></textarea>
-        </div>
-        <div class="row displayNone">
-        <div class="cell">&nbsp;</div>
-        <textarea id="PWOTotalY6" rows="10" cols="49" style="overflow: auto; width: 500px;font-size: 10px;"></textarea>
-        </div>
-        <div class="row displayNone Reppy6a">
-        <div class="cell">&nbsp;</div>
-        <textarea id="PWOTotalY6Format" rows="10" cols="49" style="background-color: #787878; color: white; border: 0px;overflow: auto; height: 500 px; width: 500px; font-size: 10px;"></textarea>
-        </div>
-        <div class="row displayNone RepZVa">
-        <div class="cell">&nbsp;</div>
-        <textarea id="PWOTotalFormat" rows="10" cols="49" style="background-color: #787878; color: white; border: 0px; overflow: auto; height: 500 px; width: 500px; font-size: 10px;"></textarea>
-        </div>
 
 
 

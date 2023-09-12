@@ -134,7 +134,7 @@ h1{
 
 .container {
 	display: grid;
-	grid-template-columns: 100% 100% 100%;
+	grid-template-columns: 300px 300px;
 	text-align: center;
 }
 

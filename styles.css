@@ -132,6 +132,12 @@ h1{
 	text-align: center;
   }
 
+.container {
+	display: grid;
+	grid-template-columns: 100px 150px 200px;
+	text-align: center;
+}
+
 /* Menu Styles */
 
 .Section {
